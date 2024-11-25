@@ -1,14 +1,14 @@
 import React from "react";
-
+import logo from "../../assets/logo/logoc.png";
 export const Navbar = () => {
   const menu = (
     <>
       {" "}
       <li>
-        <a>Navbar Item 1</a>
+        <a>Home</a>
       </li>
       <li>
-        <a>Navbar Item 2</a>
+        <a>Flights</a>
       </li>
     </>
   );
@@ -40,14 +40,19 @@ export const Navbar = () => {
                 </svg>
               </label>
             </div>
-            <div className="mx-2  px-2">Navbar Title</div>
+            <div className="mx-2  px-2">
+              <img src={logo} className="w-20" alt="SkyJabo" />
+            </div>
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
                 {menu}
               </ul>
             </div>
-            <div>test</div>
+            <div className="flex space-x-3 items-center justify-center">
+              <div className="btn">Login</div>
+              <div className="btn">Register</div>
+            </div>
           </div>
         </div>
         <div className="drawer-side">
