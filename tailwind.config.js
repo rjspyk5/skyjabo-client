@@ -10,7 +10,7 @@ export default {
     },
   },
   daisyui: {
-    themes: ["light", "dark", "corporate"],
+    themes: ["light", "night", "corporate"],
   },
   plugins: [require("daisyui")],
 };

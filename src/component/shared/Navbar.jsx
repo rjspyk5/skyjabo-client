@@ -1,14 +1,46 @@
 import React from "react";
 import logo from "../../assets/logo/logoc.png";
+import "../../Style/style.css";
+import { Link, NavLink } from "react-router";
 export const Navbar = () => {
   const menu = (
     <>
       {" "}
       <li>
-        <a>Home</a>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-primary font-bold text-white"
+              : "font-bold text-white"
+          }
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <a>Flights</a>
+        <NavLink
+          to="/flights"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-primary font-bold text-white"
+              : "font-bold text-white"
+          }
+        >
+          Flights
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-primary font-bold text-white"
+              : "font-bold text-white"
+          }
+        >
+          Dashboard
+        </NavLink>
       </li>
     </>
   );
@@ -41,17 +73,19 @@ export const Navbar = () => {
               </label>
             </div>
             <div className="mx-2  px-2">
-              <img src={logo} className="w-20" alt="SkyJabo" />
+              <Link to="/">
+                <img src={logo} className="w-20" alt="SkyJabo" />
+              </Link>
             </div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal">
+              <ul className="menu menu-horizontal space-x-2">
                 {/* Navbar menu content here */}
                 {menu}
               </ul>
             </div>
             <div className="flex space-x-3 items-center justify-center">
-              <div className="btn">Login</div>
-              <div className="btn">Register</div>
+              <div className="custom-btn">Login</div>
+              <div className="custom-btn">Register</div>
             </div>
           </div>
         </div>
@@ -61,8 +95,7 @@ export const Navbar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 min-h-full w-80 p-4">
-            {/* Sidebar content here */}
+          <ul className="menu bg-base-200 min-h-full w-80 p-4 space-y-2">
             {menu}
           </ul>
         </div>
