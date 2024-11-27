@@ -6,7 +6,7 @@ export const Footer = () => {
       <footer className="bg-[#f0fff0] py-10 px-10 font-sans tracking-wide">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-screen-xl mx-auto">
           <div>
-            <a href="javascript:void(0)">
+            <a href="">
               <img
                 src="https://readymadeui.com/readymadeui.svg"
                 alt="logo"
@@ -17,10 +17,7 @@ export const Footer = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
               gravida, mi eu pulvinar cursus, sem elit interdum mauris dipiscing
               elit. Aenean gravida, mi eu pulvinar cursus...{" "}
-              <a
-                href="javascript:void(0)"
-                className="text-sm font-semibold text-blue-500"
-              >
+              <a href="" className="text-sm font-semibold text-blue-500">
                 Read more
               </a>
             </p>
@@ -41,10 +38,7 @@ export const Footer = () => {
                     />
                   </svg>
                 </div>
-                <a
-                  href="javascript:void(0)"
-                  className="text-blue-500 text-sm ml-3"
-                >
+                <a href="" className="text-blue-500 text-sm ml-3">
                   <small className="block">Tel</small>
                   <strong>180-548-2588</strong>
                 </a>
@@ -64,10 +58,7 @@ export const Footer = () => {
                     />
                   </svg>
                 </div>
-                <a
-                  href="javascript:void(0)"
-                  className="text-blue-500 text-sm ml-3"
-                >
+                <a href="" className="text-blue-500 text-sm ml-3">
                   <small className="block">Mail</small>
                   <strong>info@example.com</strong>
                 </a>
@@ -91,10 +82,7 @@ export const Footer = () => {
                     />
                   </svg>
                 </div>
-                <a
-                  href="javascript:void(0)"
-                  className="text-blue-500 text-sm ml-3"
-                >
+                <a href="" className="text-blue-500 text-sm ml-3">
                   <small className="block">Address</small>
                   <strong>123 Main Street City, Country</strong>
                 </a>
@@ -114,10 +102,7 @@ export const Footer = () => {
                     />
                   </svg>
                 </div>
-                <a
-                  href="javascript:void(0)"
-                  className="text-blue-500 text-sm ml-3"
-                >
+                <a href="" className="text-blue-500 text-sm ml-3">
                   <small className="block">Fax</small>
                   <strong>+1-548-2588</strong>
                 </a>
@@ -162,7 +147,7 @@ export const Footer = () => {
             </p>
             <ul className="flex items-center mt-6 space-x-4">
               <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                <a href="javascript:void(0)">
+                <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20px"
@@ -178,7 +163,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                <a href="javascript:void(0)">
+                <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20px"
@@ -194,7 +179,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                <a href="javascript:void(0)">
+                <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20px"
@@ -210,11 +195,11 @@ export const Footer = () => {
                     <g
                       fill="none"
                       stroke="#007bff"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-miterlimit="10"
-                      stroke-width="40"
-                      clip-path="url(#a)"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="40"
+                      clipPath="url(#a)"
                       transform="matrix(1.33 0 0 -1.33 0 682.667)"
                     >
                       <path
@@ -230,7 +215,7 @@ export const Footer = () => {
                 </a>
               </li>
               <li className="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-                <a href="javascript:void(0)">
+                <a href="">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20px"
@@ -253,7 +238,7 @@ export const Footer = () => {
               <ul className="space-y-5">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     About Us
@@ -261,7 +246,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Contact
@@ -269,7 +254,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Careers
@@ -285,7 +270,7 @@ export const Footer = () => {
               <ul className="space-y-5">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Privacy Policy
@@ -293,7 +278,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Terms of Service
@@ -301,7 +286,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Refund Policy
@@ -315,7 +300,7 @@ export const Footer = () => {
               <ul className="space-y-5">
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     FAQs
@@ -323,7 +308,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Shipping Information
@@ -331,7 +316,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <a
-                    href="javascript:void(0)"
+                    href=""
                     className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Returns & Exchanges
@@ -346,7 +331,7 @@ export const Footer = () => {
 
               <ul className="flex flex-wrap gap-x-5 gap-4">
                 <li>
-                  <a href="javascript:void(0)" className="text-xl">
+                  <a href="" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="inline w-6 h-6"
@@ -367,7 +352,7 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" className="text-xl">
+                  <a href="" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="inline w-6 h-6"
@@ -392,7 +377,7 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" className="text-xl">
+                  <a href="" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="inline w-6 h-6"
@@ -407,9 +392,9 @@ export const Footer = () => {
                         gradientTransform="matrix(0 -1.982 -1.844 0 -132.522 -51.077)"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset="0" stop-color="#fd5" />
-                        <stop offset=".5" stop-color="#ff543e" />
-                        <stop offset="1" stop-color="#c837ab" />
+                        <stop offset="0" stopColor="#fd5" />
+                        <stop offset=".5" stopColor="#ff543e" />
+                        <stop offset="1" stopColor="#c837ab" />
                       </linearGradient>
                       <path
                         fill="url(#a)"
@@ -426,7 +411,7 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" className="text-xl">
+                  <a href="" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="inline w-6 h-6"

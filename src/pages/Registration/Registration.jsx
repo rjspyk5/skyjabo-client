@@ -1,7 +1,20 @@
 import React from "react";
 import img from "../../assets/images/low/img (19).jpg";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
 export const Registration = () => {
+  const axiosPublic = useAxiosPublic();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const response = await axiosPublic.post("/register", data);
+    console.log(response?.data);
+  };
   return (
     <div>
       <div
@@ -13,7 +26,10 @@ export const Registration = () => {
         }}
       >
         <div className="max-w-md w-full mx-auto">
-          <form className="backdrop-blur-xl bg-[#d8d8d879] rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="backdrop-blur-xl bg-[#d8d8d879] rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]"
+          >
             <div className="mb-12">
               <h3 className="text-gray-800 text-3xl font-extrabold">Sign in</h3>
             </div>
@@ -24,6 +40,7 @@ export const Registration = () => {
                   name="email"
                   type="text"
                   required
+                  {...register("email")}
                   className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
                   placeholder="Enter email"
                 />
@@ -64,6 +81,7 @@ export const Registration = () => {
                 <input
                   name="password"
                   type="password"
+                  {...register("password")}
                   required
                   className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
                   placeholder="Enter password"
@@ -84,12 +102,12 @@ export const Registration = () => {
             </div>
 
             <div className="mt-12">
-              <button
-                type="button"
+              <input
+                type="submit"
+                value="Sign In"
                 className="w-full py-2.5 px-4 text-sm font-semibold tracking-wider rounded-full text-white bg-gray-800 hover:bg-[#222] focus:outline-none"
-              >
-                Sign in
-              </button>
+              />
+
               <p className="text-gray-800 text-sm text-center mt-6">
                 Already have an account{" "}
                 <Link
