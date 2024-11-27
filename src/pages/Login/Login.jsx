@@ -1,18 +1,20 @@
 import React from "react";
+import img from "../../assets/images/low/img (19).jpg";
+import { Link } from "react-router";
 
 export const Login = () => {
   return (
     <div>
       <div
-        className="flex justify-center items-center font-[sans-serif] h-full min-h-screen p-4"
+        className="flex pt-20 justify-center bg-no-repeat bg-cover bg-center items-center font-[sans-serif] h-full min-h-screen p-4 relative"
         style={{
-          backgrounImage: "url(https://readymadeui.com/background-image.webp)",
+          backgroundImage: `url("${img}")`,
           backgroundRepeat: "no-repeat",
           backgrounSize: "cover",
         }}
       >
         <div className="max-w-md w-full mx-auto">
-          <form className="bg-opacity-70 bg-white rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
+          <form className="backdrop-blur-xl bg-[#d8d8d879] rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
             <div className="mb-12">
               <h3 className="text-gray-800 text-3xl font-extrabold">Sign in</h3>
             </div>
@@ -82,28 +84,6 @@ export const Login = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-6">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 shrink-0 border-gray-300 rounded"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-3 block text-sm text-gray-800"
-                >
-                  Remember me
-                </label>
-              </div>
-              <div>
-                <a className="text-blue-600 text-sm font-semibold hover:underline">
-                  Forgot Password?
-                </a>
-              </div>
-            </div>
-
             <div className="mt-12">
               <button
                 type="button"
@@ -113,9 +93,12 @@ export const Login = () => {
               </button>
               <p className="text-gray-800 text-sm text-center mt-6">
                 Don't have an account{" "}
-                <a className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+                <Link
+                  to="/register"
+                  className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap"
+                >
                   Register here
-                </a>
+                </Link>
               </p>
             </div>
 
