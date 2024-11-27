@@ -14,7 +14,7 @@ export const Hero = () => {
   return (
     <div className="">
       <div
-        className="hero min-h-screen bg-center absolute"
+        className="hero min-h-screen bg-center "
         style={{
           backgroundImage: `url("${img}")`,
         }}
