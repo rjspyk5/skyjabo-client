@@ -4,10 +4,10 @@ import "../../Style/style.css";
 import "./Hero.css";
 import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
 import { useState } from "react";
-import "react-datepicker/dist/react-datepicker.css";
-
-import { BsCalendarDate } from "react-icons/bs";
-import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+// import { BsCalendarDate } from "react-icons/bs";
+// import DatePicker from "react-datepicker";
+import { CustomDatePicker } from "./CustomDatePicker/CustomDatePicker";
 
 export const Hero = () => {
   const [startDate, setStartDate] = useState(null);
@@ -48,8 +48,11 @@ export const Hero = () => {
                       placeholder="To"
                     />
                   </label>
-
-                  <label className="inputt  flex items-center gap-2">
+                  <CustomDatePicker
+                    startDate={startDate}
+                    setStartDate={setStartDate}
+                  />
+                  {/* <label className="inputt  flex items-center gap-2">
                     <DatePicker
                       closeOnScroll={true}
                       toggleCalendarOnIconClick
@@ -63,7 +66,7 @@ export const Hero = () => {
                       }
                       className="calender "
                     />
-                  </label>
+                  </label> */}
                 </div>
                 <button className="custom-btn2 absolute left-[39%] md:left-[44%] bottom-[-20px]">
                   Search
