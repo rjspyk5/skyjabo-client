@@ -85,8 +85,12 @@ export const Navbar = () => {
                 </ul>
               </div>
               <div className="flex space-x-3 items-center justify-center">
-                <div className="custom-btn">Login</div>
-                <div className="custom-btn">Register</div>
+                <Link to="/login" className="custom-btn">
+                  Login
+                </Link>
+                <Link to="/register" className="custom-btn">
+                  Register
+                </Link>
               </div>
             </div>
           </div>

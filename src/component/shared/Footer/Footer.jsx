@@ -246,15 +246,15 @@ export const Footer = () => {
           </div>
         </div>
 
-        <footer class="font-sans tracking-wide ">
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
+        <footer className="font-sans tracking-wide ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">
             <div>
-              <h4 class="text-white text-lg font-semibold mb-6">Company</h4>
-              <ul class="space-y-5">
+              <h4 className="text-white text-lg font-semibold mb-6">Company</h4>
+              <ul className="space-y-5">
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     About Us
                   </a>
@@ -262,7 +262,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Contact
                   </a>
@@ -270,7 +270,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Careers
                   </a>
@@ -279,12 +279,14 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h4 class="text-white text-lg font-semibold mb-6">Information</h4>
-              <ul class="space-y-5">
+              <h4 className="text-white text-lg font-semibold mb-6">
+                Information
+              </h4>
+              <ul className="space-y-5">
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Privacy Policy
                   </a>
@@ -292,7 +294,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Terms of Service
                   </a>
@@ -300,7 +302,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Refund Policy
                   </a>
@@ -309,12 +311,12 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h4 class="text-white text-lg font-semibold mb-6">Help</h4>
-              <ul class="space-y-5">
+              <h4 className="text-white text-lg font-semibold mb-6">Help</h4>
+              <ul className="space-y-5">
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     FAQs
                   </a>
@@ -322,7 +324,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Shipping Information
                   </a>
@@ -330,7 +332,7 @@ export const Footer = () => {
                 <li>
                   <a
                     href="javascript:void(0)"
-                    class="text-gray-300 hover:text-white text-[15px]"
+                    className="text-gray-300 hover:text-white text-[15px]"
                   >
                     Returns & Exchanges
                   </a>
@@ -338,14 +340,16 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h4 class="text-lg font-semibold mb-6 text-white">Follow Us</h4>
+              <h4 className="text-lg font-semibold mb-6 text-white">
+                Follow Us
+              </h4>
 
-              <ul class="flex flex-wrap gap-x-5 gap-4">
+              <ul className="flex flex-wrap gap-x-5 gap-4">
                 <li>
-                  <a href="javascript:void(0)" class="text-xl">
+                  <a href="javascript:void(0)" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="inline w-6 h-6"
+                      className="inline w-6 h-6"
                       viewBox="0 0 512 512"
                     >
                       <path
@@ -363,10 +367,10 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" class="text-xl">
+                  <a href="javascript:void(0)" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="inline w-6 h-6"
+                      className="inline w-6 h-6"
                       viewBox="0 0 176 176"
                     >
                       <g data-name="Layer 2">
@@ -388,10 +392,10 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" class="text-xl">
+                  <a href="javascript:void(0)" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="inline w-6 h-6"
+                      className="inline w-6 h-6"
                       viewBox="0 0 24 24"
                     >
                       <linearGradient
@@ -422,10 +426,10 @@ export const Footer = () => {
                 </li>
 
                 <li>
-                  <a href="javascript:void(0)" class="text-xl">
+                  <a href="javascript:void(0)" className="text-xl">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="inline w-6 h-6"
+                      className="inline w-6 h-6"
                       viewBox="0 0 1227 1227"
                     >
                       <path
@@ -444,8 +448,8 @@ export const Footer = () => {
             </div>
           </div>
           <hr className="my-6 border-gray-500" />
-          <div class=" py-5 px-4 text-center">
-            <p class="text-gray-300 text-sm">
+          <div className=" py-5 px-4 text-center">
+            <p className="text-gray-300 text-sm">
               © ReadymadeUI. All rights reserved.
             </p>
           </div>
