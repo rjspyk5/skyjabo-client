@@ -25,11 +25,15 @@
   transition: background-color 0.3s ease;
   color: whitesmoke;
   font-weight: bold;
-  
 }
-.custom-btn2:hover{
-
+.custom-btn2:hover {
   background-color: #f7057a;
+  cursor: pointer;
+}
+
+.calender {
+  padding: 0px 24px !important;
+  width: 100%;
   cursor: pointer;
 }
 
