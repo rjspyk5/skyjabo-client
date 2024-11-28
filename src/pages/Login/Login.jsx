@@ -1,8 +1,21 @@
 import React from "react";
 import img from "../../assets/images/low/img (19).jpg";
 import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import { useAxiosPublic } from "../../hooks/useAxiosPublic";
 
 export const Login = () => {
+  const axiosPublic = useAxiosPublic();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (data) => {
+    const result = await axiosPublic.post("/login", data);
+    console.log(result.data);
+  };
   return (
     <div>
       <div
@@ -14,7 +27,10 @@ export const Login = () => {
         }}
       >
         <div className="max-w-md w-full mx-auto">
-          <form className="backdrop-blur-xl bg-[#d8d8d879] rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="backdrop-blur-xl bg-[#d8d8d879] rounded-2xl p-6 shadow-[0_2px_16px_-3px_rgba(6,81,237,0.3)]"
+          >
             <div className="mb-12">
               <h3 className="text-gray-800 text-3xl font-extrabold">Sign in</h3>
             </div>
@@ -24,6 +40,7 @@ export const Login = () => {
                 <input
                   name="email"
                   type="text"
+                  {...register("email")}
                   required
                   className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
                   placeholder="Enter email"
@@ -66,6 +83,7 @@ export const Login = () => {
                   name="password"
                   type="password"
                   required
+                  {...register("password")}
                   className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
                   placeholder="Enter password"
                 />
@@ -85,12 +103,12 @@ export const Login = () => {
             </div>
 
             <div className="mt-12">
-              <button
-                type="button"
+              <input
+                value="Sign In"
+                type="submit"
                 className="w-full py-2.5 px-4 text-sm font-semibold tracking-wider rounded-full text-white bg-gray-800 hover:bg-[#222] focus:outline-none"
-              >
-                Sign in
-              </button>
+              />
+
               <p className="text-gray-800 text-sm text-center mt-6">
                 Don't have an account{" "}
                 <Link
