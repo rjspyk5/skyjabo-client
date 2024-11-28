@@ -2,7 +2,10 @@ import React from "react";
 import logo from "../../assets/logo/logoc.png";
 import "../../Style/style.css";
 import { Link, NavLink } from "react-router";
+import { useAuth } from "./../../hooks/useAuth";
 export const Navbar = () => {
+  const { user, logout } = useAuth();
+
   const menu = (
     <>
       {" "}
@@ -84,7 +87,7 @@ export const Navbar = () => {
                   {menu}
                 </ul>
               </div>
-              {/* {
+              {user ? (
                 <div className="dropdown dropdown-end">
                   <div
                     tabIndex={0}
@@ -112,19 +115,20 @@ export const Navbar = () => {
                       <a>Settings</a>
                     </li>
                     <li>
-                      <button>Logout</button>
+                      <button onClick={logout}>Logout</button>
                     </li>
                   </ul>
                 </div>
-              } */}
-              <div className="flex space-x-3 items-center justify-center">
-                <Link to="/login" className="custom-btn">
-                  Login
-                </Link>
-                <Link to="/register" className="custom-btn">
-                  Register
-                </Link>
-              </div>
+              ) : (
+                <div className="flex space-x-3 items-center justify-center">
+                  <Link to="/login" className="custom-btn">
+                    Login
+                  </Link>
+                  <Link to="/register" className="custom-btn">
+                    Register
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
           <div className="drawer-side">

@@ -34,13 +34,14 @@ export const AuthProvider = ({ children }) => {
   const register = () => {};
   const logout = async () => {
     setloading(true);
-    const response = await axiosPublic.post("/logout", user);
-    console.log(response);
+    await axiosPublic.post("/logout", user);
     setuser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ login, register, logout, user, loading }}>
+    <AuthContext.Provider
+      value={{ login, register, logout, user, loading, setuser }}
+    >
       {children}
     </AuthContext.Provider>
   );

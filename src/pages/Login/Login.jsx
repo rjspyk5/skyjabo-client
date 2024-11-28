@@ -14,6 +14,11 @@ export const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const result = await axiosPublic.post("/login", data);
+    if (result.status === 200) {
+      console.log("test");
+      window.location.reload();
+    }
+
     console.log(result.data);
   };
   return (
