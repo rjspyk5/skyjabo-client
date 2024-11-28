@@ -33,18 +33,20 @@ export const Navbar = () => {
           Flights
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "bg-primary font-bold text-white"
-              : "font-bold text-white"
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold text-white"
+                : "font-bold text-white"
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (

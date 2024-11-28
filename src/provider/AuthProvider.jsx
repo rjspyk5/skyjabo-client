@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     setloading(true);
     await axiosPublic.post("/logout", user);
     setuser(null);
+    window.location.reload();
   };
 
   return (
