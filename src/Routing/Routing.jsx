@@ -7,11 +7,17 @@ import { Login } from "../pages/Login/Login";
 import { Registration } from "../pages/Registration/Registration";
 import { PrivateRoute } from "./PrivateRoute";
 import { UserDashboard } from "../pages/Dashboard/UserDashboard/UserDashboard";
+import { AdminLayout } from "../layout/AdminLayout";
+import { AdminChecker } from "./AdminChecker";
 
 export const Routing = createBrowserRouter([
   {
     path: "/",
-    element: <RootLayout />,
+    element: (
+      <AdminChecker>
+        <RootLayout />
+      </AdminChecker>
+    ),
     children: [
       { path: "", element: <Home /> },
       { path: "/flights", element: <Flights /> },
@@ -26,5 +32,9 @@ export const Routing = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "admin",
+    element: <AdminLayout />,
   },
 ]);
