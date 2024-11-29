@@ -30,7 +30,7 @@ export const Navbar = () => {
               : "font-bold text-white"
           }
         >
-          Flights
+          Flights Search
         </NavLink>
       </li>
       {user && (

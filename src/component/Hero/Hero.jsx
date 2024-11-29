@@ -8,13 +8,26 @@ import { useState } from "react";
 // import { BsCalendarDate } from "react-icons/bs";
 // import DatePicker from "react-datepicker";
 import { CustomDatePicker } from "./CustomDatePicker/CustomDatePicker";
+import { useNavigate } from "react-router";
+import { useForm, Controller } from "react-hook-form";
 
 export const Hero = () => {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
+
   return (
     <div className="">
       <div
-        className="hero min-h-screen bg-center "
+        className="hero min-h-screen bg-center mb-10"
         style={{
           backgroundImage: `url("${img}")`,
         }}
@@ -22,55 +35,68 @@ export const Hero = () => {
         <div className="hero-overlay bg-opacity-70 bg-black"></div>
 
         <div className="hero-content  text-center ">
-          <div className="space-y-5">
-            <h1 className="my-16 text-center lg:text-5xl md:text-4xl text-3xl font-bold max-w-2xl mx-auto">
+          <div className="space-y-2 md:space-y-4 lg:space-y-5">
+            <h1 className="my-16 text-center lg:text-5xl md:text-3xl text-2xl font-bold max-w-2xl mx-auto">
               {" "}
               Welcome to SkyJabo! Explore your journey with seamless bookings.
             </h1>
             <div className="backdrop-blur-lg mt-5">
-              <div className="p-12 relative">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <label className="inputt flex items-center gap-2">
-                    <GiAirplaneDeparture />
-                    <input
-                      type="text"
-                      name="origin"
-                      className="grow"
-                      placeholder="From"
+              <div className="md:p-12 p-8 relative">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div>
+                      <label className="inputt flex items-center gap-2">
+                        <GiAirplaneDeparture />
+                        <input
+                          {...register("origin", { required: true })}
+                          type="text"
+                          name="origin"
+                          className=""
+                          placeholder="From"
+                        />
+                      </label>{" "}
+                      <span className="text-red-500">
+                        {errors?.origin && "  This field is required"}
+                      </span>
+                    </div>
+
+                    <div className="">
+                      <label className="inputt  flex items-center gap-2">
+                        <GiAirplaneArrival />
+                        <input
+                          {...register("destination", { required: true })}
+                          type="text"
+                          className=" grow"
+                          name="destination"
+                          placeholder="To"
+                        />
+                      </label>
+
+                      <span className="text-red-500">
+                        {" "}
+                        {errors?.destination && "  This field is required"}
+                      </span>
+                    </div>
+                    <Controller
+                      control={control}
+                      name="date"
+                      rules={{ required: "Required" }}
+                      render={({ field }) => (
+                        <CustomDatePicker
+                          startDate={field.value}
+                          setStartDate={setStartDate}
+                          change={field.onChange}
+                          errors={errors}
+                        />
+                      )}
                     />
-                  </label>
-                  <label className="inputt  flex items-center gap-2">
-                    <GiAirplaneArrival />
-                    <input
-                      type="text"
-                      className="grow "
-                      name="destination"
-                      placeholder="To"
-                    />
-                  </label>
-                  <CustomDatePicker
-                    startDate={startDate}
-                    setStartDate={setStartDate}
+                  </div>
+                  <input
+                    type="submit"
+                    value="Search"
+                    className="custom-btn2  absolute left-[29%] md:left-[44%] bottom-[-20px]"
                   />
-                  {/* <label className="inputt  flex items-center gap-2">
-                    <DatePicker
-                      closeOnScroll={true}
-                      toggleCalendarOnIconClick
-                      showIcon
-                      placeholderText="Select Date"
-                      selected={startDate}
-                      dateFormat="MMMM d, yyyy"
-                      onChange={(date) => setStartDate(date)}
-                      icon={
-                        <BsCalendarDate className=" bottom-[-20%] left-[-3%] cursor-pointer" />
-                      }
-                      className="calender "
-                    />
-                  </label> */}
-                </div>
-                <button className="custom-btn2 absolute left-[39%] md:left-[44%] bottom-[-20px]">
-                  Search
-                </button>
+                </form>
               </div>
             </div>
           </div>
