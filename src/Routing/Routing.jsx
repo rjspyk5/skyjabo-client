@@ -9,6 +9,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { UserDashboard } from "../pages/Dashboard/UserDashboard/UserDashboard";
 import { AdminLayout } from "../layout/AdminLayout";
 import { AdminChecker } from "./AdminChecker";
+import { AdminRoute } from "./AdminRoute";
 
 export const Routing = createBrowserRouter([
   {
@@ -35,6 +36,11 @@ export const Routing = createBrowserRouter([
   },
   {
     path: "admin",
-    element: <AdminLayout />,
+    element: (
+      <AdminRoute>
+        {" "}
+        <AdminLayout />
+      </AdminRoute>
+    ),
   },
 ]);
