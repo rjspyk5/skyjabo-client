@@ -8,8 +8,8 @@ export const Flights = () => {
       <div className="mb-10">
         <SearchSection />
       </div>
-      <div className="flex gap-16">
-        <div className="w-[25%]  space-y-5">
+      <div className="flex gap-16 ">
+        <div className="w-[25%] hidden lg:block  space-y-5">
           <div className="flex justify-between p-3  border-b">
             <h6>Filters</h6>
             <span>clear</span>
@@ -63,9 +63,10 @@ export const Flights = () => {
           </div>
         </div>
         <div className="flex-1">
-          <h6 className="text-2xl font-bold text-center p-4">
-            20 Seats Available
-          </h6>
+          <div className="flex justify-between">
+            <button className="btn lg:hidden">Filter</button>
+            <h6 className="text-2xl font-bold  p-4">20 Ticktes Available</h6>
+          </div>
           <div className="p-5 flex items-center bg-white rounded-md justify-between">
             <div className="flex flex-col justify-center items-center ">
               <img className="w-20" src={img} alt="" />
