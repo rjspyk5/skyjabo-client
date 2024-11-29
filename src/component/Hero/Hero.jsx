@@ -3,6 +3,7 @@ import img from "../../assets/images/img (18).jpg";
 import "../../Style/style.css";
 import "./Hero.css";
 import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
+
 import { useState } from "react";
 // import "react-datepicker/dist/react-datepicker.css";
 // import { BsCalendarDate } from "react-icons/bs";
@@ -10,20 +11,9 @@ import { useState } from "react";
 import { CustomDatePicker } from "./CustomDatePicker/CustomDatePicker";
 import { useNavigate } from "react-router";
 import { useForm, Controller } from "react-hook-form";
+import { SearchSection } from "./SearchSection/SearchSection";
 
 export const Hero = () => {
-  const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(null);
-  const {
-    control,
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => console.log(data);
-
   return (
     <div className="">
       <div
@@ -40,7 +30,8 @@ export const Hero = () => {
               {" "}
               Welcome to SkyJabo! Explore your journey with seamless bookings.
             </h1>
-            <div className="backdrop-blur-lg mt-5">
+            <SearchSection />
+            {/* <div className="backdrop-blur-lg mt-5">
               <div className="md:p-12 p-8 relative">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -98,7 +89,7 @@ export const Hero = () => {
                   />
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
