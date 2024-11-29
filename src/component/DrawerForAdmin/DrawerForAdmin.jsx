@@ -35,7 +35,7 @@ export const DrawerForAdmin = ({ menu }) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu  min-h-full w-80 backdrop-blur-3xl bg-[#57575747] p-4">
+          <ul className="menu  min-h-full w-80 space-y-2 backdrop-blur-3xl bg-[#57575747] p-4">
             {" "}
             {menu}
           </ul>

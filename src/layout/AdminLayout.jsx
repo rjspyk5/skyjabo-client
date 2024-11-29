@@ -1,16 +1,53 @@
 import React from "react";
 import { DrawerForAdmin } from "../component/DrawerForAdmin/DrawerForAdmin";
 import { useAuth } from "../hooks/useAuth";
+import { NavLink, Outlet } from "react-router";
+import logo from "../assets/logo/logoc.png";
 
 export const AdminLayout = () => {
   const { user, logout } = useAuth();
   const menu = (
     <>
       <li>
-        <a>Sidebar Item 1</a>
+        <NavLink
+          to=""
+          className={({ isActive }) =>
+            `${
+              isActive && "bg-primary !text-white"
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+          }
+          end
+        >
+          Dashboard
+        </NavLink>
+      </li>
+
+      <li>
+        {" "}
+        <NavLink
+          to="/admin/bookings"
+          className={({ isActive }) =>
+            `${
+              isActive && "bg-primary !text-white"
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+          }
+          end
+        >
+          All Bookings
+        </NavLink>
       </li>
       <li>
-        <a>Sidebar Item 2</a>
+        <NavLink
+          to="/admin/users"
+          className={({ isActive }) =>
+            `${
+              isActive && "bg-primary !text-white"
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+          }
+          end
+        >
+          All Users
+        </NavLink>
       </li>
     </>
   );
@@ -19,15 +56,19 @@ export const AdminLayout = () => {
       <div className="flex">
         {/* left side menu*/}
         <div className="w-[23%] hidden lg:block bg-white fixed top-0 h-full bg-gradient-to-br ">
-          <ul className="menu w-full   p-4">{menu} </ul>
+          <div className="py-4 px-8">
+            <img className="w-20 h-8" src={logo} alt="" />
+          </div>
+
+          <hr />
+          <ul className="menu w-full space-y-2  p-4">{menu} </ul>
         </div>
         {/* Right side */}
 
-        <div className="flex-1 flex bg-[#F4F2F3] min-h-screen lg:ml-[23%] w-full">
+        <div className="flex-1  bg-[#F4F2F3] min-h-screen lg:ml-[23%] w-full">
           {/* Navbar */}
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between py-2 shadow-xl lg:shadow-none bg-white lg:bg-none">
             <DrawerForAdmin menu={menu} />
-
             <div className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
@@ -60,6 +101,8 @@ export const AdminLayout = () => {
               </ul>
             </div>
           </div>
+
+          <Outlet />
         </div>
       </div>
     </>
