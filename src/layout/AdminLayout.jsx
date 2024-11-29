@@ -14,11 +14,24 @@ export const AdminLayout = () => {
           className={({ isActive }) =>
             `${
               isActive && "bg-primary !text-white"
-            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary  transition-colors duration-500 ease-linear`
           }
           end
         >
           Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="flights"
+          className={({ isActive }) =>
+            `${
+              isActive && "bg-primary !text-white"
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary  transition-colors duration-500 ease-linear`
+          }
+          end
+        >
+          Manage Flights
         </NavLink>
       </li>
 
@@ -29,7 +42,7 @@ export const AdminLayout = () => {
           className={({ isActive }) =>
             `${
               isActive && "bg-primary !text-white"
-            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary transition-colors duration-500 ease-linear`
           }
           end
         >
@@ -42,7 +55,7 @@ export const AdminLayout = () => {
           className={({ isActive }) =>
             `${
               isActive && "bg-primary !text-white"
-            } hover:bg-primary hover:text-white text-black focus:!bg-primary `
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary transition-colors duration-500 ease-linear`
           }
           end
         >
@@ -67,8 +80,9 @@ export const AdminLayout = () => {
 
         <div className="flex-1  bg-[#F4F2F3] min-h-screen lg:ml-[23%] w-full">
           {/* Navbar */}
-          <div className="flex w-full justify-between py-2 shadow-xl lg:shadow-none bg-white lg:bg-none">
+          <div className="flex w-full justify-between items-center py-2 shadow-xl lg:shadow-none bg-white lg:bg-none">
             <DrawerForAdmin menu={menu} />
+            <img className="w-20 h-8 lg:hidden" src={logo} alt="" />
             <div className="dropdown dropdown-end ">
               <div
                 tabIndex={0}
