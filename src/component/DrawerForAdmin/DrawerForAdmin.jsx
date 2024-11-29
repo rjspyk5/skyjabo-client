@@ -4,7 +4,7 @@ export const DrawerForAdmin = ({ menu }) => {
   return (
     <div>
       {" "}
-      <div className="drawer">
+      <div className="drawer z-50">
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           <div className="flex-none lg:hidden">
@@ -35,7 +35,7 @@ export const DrawerForAdmin = ({ menu }) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu  min-h-full w-80 space-y-2 backdrop-blur-3xl bg-[#57575747] p-4">
+          <ul className="menu  min-h-full w-80 space-y-2 backdrop-blur-3xl bg-white p-4">
             {" "}
             {menu}
           </ul>

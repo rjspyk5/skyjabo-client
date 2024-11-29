@@ -80,7 +80,7 @@ export const AdminLayout = () => {
 
         <div className="flex-1  bg-[#F4F2F3] min-h-screen lg:ml-[23%] w-full">
           {/* Navbar */}
-          <div className="flex w-full justify-between items-center py-2 shadow-xl lg:shadow-none bg-white lg:bg-none">
+          <div className="flex w-full justify-between items-center pt-2 pb-[7px]  bg-white  ">
             <DrawerForAdmin menu={menu} />
             <img className="w-20 h-8 lg:hidden" src={logo} alt="" />
             <div className="dropdown dropdown-end ">
@@ -98,13 +98,10 @@ export const AdminLayout = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-white *:text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
-                  </a>
+                  <a>Profile</a>
                 </li>
                 <li>
                   <a>Settings</a>
@@ -115,6 +112,7 @@ export const AdminLayout = () => {
               </ul>
             </div>
           </div>
+          <hr />
 
           <Outlet />
         </div>
