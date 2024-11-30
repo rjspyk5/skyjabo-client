@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router";
+import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 export const ModallForFlightCreate = ({ htmlfor }) => {
+  const axiosPublic = useAxiosPublic();
+  const modalRef = useRef();
   const {
     register,
     handleSubmit,
@@ -12,16 +17,45 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
   } = useForm();
 
   const [startDate, setStartDate] = useState(new Date());
-  const [arrivalDate, setArrivalDate] = useState(new Date());
 
-  // Handle form submission
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const date = data.date;
+      data.date = date.toISOString().split("T")[0];
+
+      data.time = date.toTimeString().split(" ")[0];
+
+      const response = await axiosPublic.post("/flights", data);
+      if (response?.data?.message === "Create Flight Successfully") {
+        Swal.fire({
+          icon: "success",
+          title: "Create Flight Successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: response?.data?.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      modalRef.current.checked = false;
+    }
   };
 
   return (
     <div>
-      <input type="checkbox" id={htmlfor} className="modal-toggle" />
+      <input
+        ref={modalRef}
+        type="checkbox"
+        id={htmlfor}
+        className="modal-toggle"
+      />
       <div className="modal">
         <div className="modal-box bg-white text-black">
           <label
@@ -35,18 +69,34 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
             {/* Flight Name */}
             <div className="form-control">
               <label className="label">
+                <span className="label-text text-black">Flight NUmber</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter flight Number"
+                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("flightNumber", {
+                  required: "Flight number is required",
+                })}
+              />
+              {errors.flightNumber && (
+                <p className="text-red-500">{errors.flightNumber.message}</p>
+              )}
+            </div>
+            <div className="form-control">
+              <label className="label">
                 <span className="label-text text-black">Flight Name</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter flight name"
+                placeholder="Enter Airline name"
                 className="input input-bordered w-full bg-gray-100 text-black"
-                {...register("flightName", {
-                  required: "Flight name is required",
+                {...register("airline", {
+                  required: "Airline name is required",
                 })}
               />
-              {errors.flightName && (
-                <p className="text-red-500">{errors.flightName.message}</p>
+              {errors.airline && (
+                <p className="text-red-500">{errors.airline.message}</p>
               )}
             </div>
 
@@ -59,7 +109,7 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
                 selected={startDate}
                 onChange={(date) => {
                   setStartDate(date);
-                  setValue("departureTime", date);
+                  setValue("date", date);
                 }}
                 showTimeSelect
                 timeFormat="HH:mm"
@@ -70,41 +120,12 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
               />
               <input
                 type="hidden"
-                {...register("departureTime", {
+                {...register("date", {
                   required: "Departure time is required",
                 })}
               />
-              {errors.departureTime && (
-                <p className="text-red-500">{errors.departureTime.message}</p>
-              )}
-            </div>
-
-            {/* Arrival Time */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text text-black">Arrival Time</span>
-              </label>
-              <DatePicker
-                selected={arrivalDate}
-                onChange={(date) => {
-                  setArrivalDate(date);
-                  setValue("arrivalTime", date);
-                }}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="MMMM d, yyyy h:mm aa"
-                className="input input-bordered w-full bg-gray-100 text-black"
-              />
-              <input
-                type="hidden"
-                {...register("arrivalTime", {
-                  required: "Arrival time is required",
-                })}
-              />
-              {errors.arrivalTime && (
-                <p className="text-red-500">{errors.arrivalTime.message}</p>
+              {errors.date && (
+                <p className="text-red-500">{errors.date.message}</p>
               )}
             </div>
 
@@ -146,10 +167,46 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
               )}
             </div>
 
+            {/* Origin */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-black">Origin</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter origin city"
+                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("origin", {
+                  required: "Origin is required",
+                })}
+              />
+              {errors.origin && (
+                <p className="text-red-500">{errors.origin.message}</p>
+              )}
+            </div>
+
+            {/* Destination */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-black">Destination</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter destination city"
+                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("destination", {
+                  required: "Destination is required",
+                })}
+              />
+              {errors.destination && (
+                <p className="text-red-500">{errors.destination.message}</p>
+              )}
+            </div>
+
             <div className="modal-action">
               <label
                 htmlFor={htmlfor}
-                className="py-2 px-4 rounded-md bg-slate-500 text-white"
+                className="py-2 px-4 cursor-pointer rounded-md bg-slate-500 text-white"
               >
                 Close
               </label>
