@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
 export const Bookings = () => {
-  const handleBooking = (e) => {
-    e.preventDefault();
-    alert("Booking successful!");
+  const { register, handleSubmit, setValue } = useForm();
+
+  useEffect(() => {
+    const dummyData = {
+      date: "2024-12-15",
+      email: "test@example.com",
+      departureCity: "Dhaka",
+      destinationCity: "New York",
+    };
+
+    setValue("date", dummyData.date);
+    setValue("email", dummyData.email);
+    setValue("departureCity", dummyData.departureCity);
+    setValue("destinationCity", dummyData.destinationCity);
+  }, [setValue]);
+
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
@@ -13,47 +29,56 @@ export const Bookings = () => {
           Book Your Flight
         </h2>
 
-        <form onSubmit={handleBooking} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">Full Name</label>
+              <label className="block font-semibold mb-2 text-black">
+                Full Name
+              </label>
               <input
                 type="text"
-                className="input input-bordered w-full"
+                {...register("fullName", { required: true })}
+                className="input input-bordered w-full bg-gray-100 text-black"
                 placeholder="Enter your full name"
-                required
               />
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">Email Address</label>
+              <label className="block font-semibold mb-2 text-black">
+                Email Address
+              </label>
               <input
                 type="email"
-                className="input input-bordered w-full"
-                placeholder="Enter your email"
-                required
+                {...register("email")}
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                disabled
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">Phone Number</label>
+              <label className="block font-semibold mb-2 text-black">
+                Phone Number
+              </label>
               <input
                 type="tel"
-                className="input input-bordered w-full"
+                {...register("phone", { required: true })}
+                className="input input-bordered w-full bg-gray-100 text-black"
                 placeholder="Enter your phone number"
-                required
               />
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">Date of Travel</label>
+              <label className="block font-semibold mb-2 text-black">
+                Date of Travel
+              </label>
               <input
                 type="date"
-                className="input input-bordered w-full"
-                required
+                {...register("date")}
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                disabled
               />
             </div>
           </div>
@@ -61,45 +86,51 @@ export const Bookings = () => {
           {/* Flight Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">Departure City</label>
+              <label className="block font-semibold mb-2 text-black">
+                Departure City
+              </label>
               <input
                 type="text"
-                className="input input-bordered w-full"
-                placeholder="Enter departure city"
-                required
+                {...register("departureCity")}
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                disabled
               />
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">
+              <label className="block font-semibold mb-2 text-black">
                 Destination City
               </label>
               <input
                 type="text"
-                className="input input-bordered w-full"
-                placeholder="Enter destination city"
-                required
+                {...register("destinationCity")}
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                disabled
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">
+              <label className="block font-semibold mb-2 text-black">
                 Number of Passengers
               </label>
               <input
                 type="number"
-                className="input input-bordered w-full"
+                {...register("passengers", { required: true, min: 1 })}
+                className="input input-bordered w-full bg-gray-100 text-black"
                 placeholder="Enter number of passengers"
-                min="1"
-                required
               />
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">Class</label>
-              <select className="select select-bordered w-full" required>
+              <label className="block font-semibold mb-2 text-black">
+                Class
+              </label>
+              <select
+                {...register("class", { required: true })}
+                className="select select-bordered w-full bg-gray-100 text-black"
+              >
                 <option value="economy">Economy</option>
                 <option value="business">Business</option>
                 <option value="first">First Class</option>
@@ -109,8 +140,13 @@ export const Bookings = () => {
 
           {/* Payment Information */}
           <div>
-            <label className="block font-semibold mb-2">Payment Method</label>
-            <select className="select select-bordered w-full" required>
+            <label className="block font-semibold mb-2 text-black">
+              Payment Method
+            </label>
+            <select
+              {...register("paymentMethod", { required: true })}
+              className="select select-bordered w-full bg-gray-100 text-black"
+            >
               <option value="credit-card">Credit/Debit Card</option>
               <option value="paypal">PayPal</option>
               <option value="bank-transfer">Bank Transfer</option>
@@ -121,7 +157,7 @@ export const Bookings = () => {
           <div className="pt-6 text-center">
             <button
               type="submit"
-              className="btn btn-primary w-full md:w-auto px-8"
+              className="py-2 px-4 rounded-md bg-green-500 text-white w-full md:w-auto"
             >
               Confirm Booking
             </button>
