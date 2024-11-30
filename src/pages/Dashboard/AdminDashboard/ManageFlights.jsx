@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { DashboardSectionHeader } from "./DashboardSectionHeader";
 import { ModallForFlightCreate } from "../../../component/ModalForFlightCreate/ModallForFlightCreate";
+import { useQuery } from "@tanstack/react-query";
+import { useAxiosSequre } from "./../../../hooks/useAxiosSequre";
+import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 
 export const ManageFlights = () => {
-  const navigate = useNavigate();
+  const axiosSequre = useAxiosSequre();
 
   const [flights, setFlights] = useState([
     {
@@ -25,6 +28,19 @@ export const ManageFlights = () => {
     },
   ]);
 
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["loadAllFlights"],
+    queryFn: async () => {
+      const result = await axiosSequre.get("/flights/adminadded");
+      return result.data;
+    },
+  });
+
+  const handleDelte = async (id) => {
+    const result = await axiosSequre.delete(`/flights/${id}`);
+    curdOperationChecker(result);
+    refetch();
+  };
   return (
     <main className="p-6">
       <section className="mb-12">
@@ -40,7 +56,7 @@ export const ManageFlights = () => {
 
         {/* Modal Start */}
 
-        <ModallForFlightCreate htmlfor="my_modal_6" />
+        <ModallForFlightCreate htmlfor="my_modal_6" refetch={refetch} />
 
         {/* Modal End */}
 
@@ -52,32 +68,47 @@ export const ManageFlights = () => {
                 <th className="p-2 md:p-4 text-left">Airline</th>
                 <th className="p-2 md:p-4 text-left">Origin</th>
                 <th className="p-2 md:p-4 text-left">Destination</th>
+                <th className="p-2 md:p-4 text-left">Date</th>
+                <th className="p-2 md:p-4 text-left">Time</th>
                 <th className="p-2 md:p-4 text-left">Price</th>
                 <th className="p-2 md:p-4 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {flights.map((flight) => (
-                <tr key={flight.id} className="border-t">
-                  <td className="p-2 md:p-4 text-gray-800">
-                    {flight.flightNumber}
-                  </td>
-                  <td className="p-2 md:p-4 text-gray-800">{flight.airline}</td>
-                  <td className="p-2 md:p-4 text-gray-800">{flight.origin}</td>
-                  <td className="p-2 md:p-4 text-gray-800">
-                    {flight.destination}
-                  </td>
-                  <td className="p-2 md:p-4 text-gray-800">${flight.price}</td>
-                  <td className="p-2 md:p-4 space-x-2 flex">
-                    <button className="btn btn-sm bg-info border-none text-white">
-                      Edit
-                    </button>
-                    <button className="btn btn-sm bg-red-500 border-none text-white">
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {!isLoading &&
+                data?.map((flight) => (
+                  <tr
+                    onClick={() => handleDelte(flight._id)}
+                    key={flight._id}
+                    className="border-t"
+                  >
+                    <td className="p-2 md:p-4 text-gray-800">
+                      {flight.flightNumber}
+                    </td>
+                    <td className="p-2 md:p-4 text-gray-800">
+                      {flight.airline}
+                    </td>
+                    <td className="p-2 md:p-4 text-gray-800">
+                      {flight.origin}
+                    </td>
+                    <td className="p-2 md:p-4 text-gray-800">
+                      {flight.destination}
+                    </td>
+                    <td className="p-2 md:p-4 text-gray-800">{flight.date}</td>
+                    <td className="p-2 md:p-4 text-gray-800">{flight.time}</td>
+                    <td className="p-2 md:p-4 text-gray-800">
+                      ${flight.price}
+                    </td>
+                    <td className="p-2 md:p-4 space-x-2 flex">
+                      <button className="btn btn-sm bg-info border-none text-white">
+                        Edit
+                      </button>
+                      <button className="btn btn-sm bg-red-500 border-none text-white">
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

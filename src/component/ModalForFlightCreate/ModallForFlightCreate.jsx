@@ -5,9 +5,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router";
 import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useAxiosSequre } from "../../hooks/useAxiosSequre";
 
-export const ModallForFlightCreate = ({ htmlfor }) => {
-  const axiosPublic = useAxiosPublic();
+export const ModallForFlightCreate = ({ htmlfor, refetch }) => {
+  const axiosSequre = useAxiosSequre();
   const modalRef = useRef();
   const {
     register,
@@ -25,14 +26,17 @@ export const ModallForFlightCreate = ({ htmlfor }) => {
 
       data.time = date.toTimeString().split(" ")[0];
 
-      const response = await axiosPublic.post("/flights", data);
+      const response = await axiosSequre.post("/flights", data);
+
       if (response?.data?.message === "Create Flight Successfully") {
-        Swal.fire({
-          icon: "success",
-          title: "Create Flight Successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        refetch().then(() =>
+          Swal.fire({
+            icon: "success",
+            title: "Create Flight Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        );
       } else {
         Swal.fire({
           icon: "error",
