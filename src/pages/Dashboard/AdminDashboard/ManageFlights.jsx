@@ -5,6 +5,7 @@ import { ModallForFlightCreate } from "../../../component/ModalForFlightCreate/M
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSequre } from "./../../../hooks/useAxiosSequre";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
+import Swal from "sweetalert2";
 
 export const ManageFlights = () => {
   const axiosSequre = useAxiosSequre();
@@ -37,10 +38,23 @@ export const ManageFlights = () => {
   });
 
   const handleDelte = async (id) => {
-    const result = await axiosSequre.delete(`/flights/${id}`);
-    curdOperationChecker(result);
-    refetch();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00bf4c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      const result = await axiosSequre.delete(`/flights/${id}`);
+      curdOperationChecker(result);
+      refetch();
+    }
   };
+
   return (
     <main className="p-6">
       <section className="mb-12">
