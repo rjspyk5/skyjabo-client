@@ -13,6 +13,7 @@ import { AdminRoute } from "./AdminRoute";
 import { AllBookings } from "../pages/Dashboard/AdminDashboard/AllBookings";
 import { AllUsers } from "../pages/Dashboard/AdminDashboard/AllUsers";
 import { ManageFlights } from "../pages/Dashboard/AdminDashboard/ManageFlights";
+import { Bookings } from "../pages/Bookings/Bookings";
 
 export const Routing = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const Routing = createBrowserRouter([
       { path: "/flights", element: <Flights /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Registration /> },
+      { path: "/book/:id", element: <Bookings /> },
       {
         path: "/dashboard",
         element: (
