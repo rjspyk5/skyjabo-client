@@ -6,29 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSequre } from "./../../../hooks/useAxiosSequre";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 import Swal from "sweetalert2";
+import { ModallForEditFlight } from "../../../component/ModalForEditFlight/ModalForEditFlight";
 
 export const ManageFlights = () => {
   const axiosSequre = useAxiosSequre();
-
-  const [flights, setFlights] = useState([
-    {
-      id: 1,
-      flightNumber: "UA123",
-      airline: "United Airlines",
-      origin: "LAX",
-      destination: "JFK",
-      price: 500,
-    },
-    {
-      id: 2,
-      flightNumber: "AA456",
-      airline: "American Airlines",
-      origin: "ORD",
-      destination: "MIA",
-      price: 400,
-    },
-  ]);
-
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["loadAllFlights"],
     queryFn: async () => {
@@ -68,11 +49,7 @@ export const ManageFlights = () => {
           </label>
         </div>
 
-        {/* Modal Start */}
-
         <ModallForFlightCreate htmlfor="my_modal_6" refetch={refetch} />
-
-        {/* Modal End */}
 
         <div className="overflow-x-auto">
           <table className="table w-full table-auto bg-white shadow rounded-lg">
@@ -91,11 +68,7 @@ export const ManageFlights = () => {
             <tbody>
               {!isLoading &&
                 data?.map((flight) => (
-                  <tr
-                    onClick={() => handleDelte(flight._id)}
-                    key={flight._id}
-                    className="border-t"
-                  >
+                  <tr key={flight._id} className="border-t">
                     <td className="p-2 md:p-4 text-gray-800">
                       {flight.flightNumber}
                     </td>
@@ -114,10 +87,21 @@ export const ManageFlights = () => {
                       ${flight.price}
                     </td>
                     <td className="p-2 md:p-4 space-x-2 flex">
-                      <button className="btn btn-sm bg-info border-none text-white">
+                      <label
+                        htmlFor="my_modal_7"
+                        className="btn btn-sm bg-info border-none text-white"
+                      >
                         Edit
-                      </button>
-                      <button className="btn btn-sm bg-red-500 border-none text-white">
+                      </label>
+                      <ModallForEditFlight
+                        htmlfor="my_modal_7"
+                        refetch={refetch}
+                        data={flight}
+                      />
+                      <button
+                        onClick={() => handleDelte(flight._id)}
+                        className="btn btn-sm bg-red-500 border-none text-white"
+                      >
                         Delete
                       </button>
                     </td>
