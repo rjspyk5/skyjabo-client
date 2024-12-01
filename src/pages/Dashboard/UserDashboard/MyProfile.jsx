@@ -6,7 +6,7 @@ export const MyProfile = () => {
     name: "Rakibul Hasan",
     phone: "+880 123 456 789",
     email: "rakibul@example.com",
-    icon: "https://via.placeholder.com/150", // Replace with actual image URL
+    icon: "https://via.placeholder.com/150",
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -42,7 +42,7 @@ export const MyProfile = () => {
             className="w-36 h-36 rounded-full border-4 border-blue-500 mb-6"
           />
           <h1 className="text-4xl font-bold text-gray-900">{user.name}</h1>
-          <p className="text-gray-600 mt-2 text-lg">Full Name</p>
+
           <button
             onClick={toggleEdit}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
