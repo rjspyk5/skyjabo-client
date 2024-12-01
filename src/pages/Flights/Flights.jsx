@@ -3,35 +3,12 @@ import { SearchSection } from "../../component/Hero/SearchSection/SearchSection"
 import img from "../../assets/images/low/img (1).jpg";
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
-
-// Dummy Data for Flights
-const flightsData = [
-  {
-    id: 1,
-    airline: "Test Airline 1",
-    img: img,
-    departureTime: "19:00",
-    arrivalTime: "00:15",
-    duration: "05h 15m",
-    stops: "1 stop via Goa",
-    origin: "Delhi",
-    destination: "Mumbai",
-  },
-  {
-    id: 2,
-    airline: "Test Airline 2",
-    img: img,
-    departureTime: "08:30",
-    arrivalTime: "13:45",
-    duration: "05h 15m",
-    stops: "Non-stop",
-    origin: "Kolkata",
-    destination: "Chennai",
-    price: "$450",
-  },
-];
+import { useNavigate } from "react-router";
+import { useAxiosSequre } from "../../hooks/useAxiosSequre";
 
 export const Flights = () => {
+  const navigate = useNavigate();
+  const axiosSequre = useAxiosSequre();
   const axiosPublic = useAxiosPublic();
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["flights"],
@@ -270,7 +247,12 @@ export const Flights = () => {
                   >
                     View Details
                   </button>
-                  <button className="btn md:btn-md btn-sm">Book Now</button>
+                  <button
+                    onClick={() => navigate(`/book/${flight?._id}`)}
+                    className="btn md:btn-md btn-sm"
+                  >
+                    Book Now
+                  </button>
                 </div>
                 {/* Mobile View */}
                 <div className="flex justify-between items-center w-full md:hidden">

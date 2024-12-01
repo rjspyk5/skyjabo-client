@@ -14,6 +14,7 @@ import { AllBookings } from "../pages/Dashboard/AdminDashboard/AllBookings";
 import { AllUsers } from "../pages/Dashboard/AdminDashboard/AllUsers";
 import { ManageFlights } from "../pages/Dashboard/AdminDashboard/ManageFlights";
 import { Bookings } from "../pages/Bookings/Bookings";
+import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 
 export const Routing = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ export const Routing = createBrowserRouter([
         <RootLayout />
       </AdminChecker>
     ),
+    errorElement: <ErrorPage />,
     children: [
       { path: "", element: <Home /> },
       { path: "/flights", element: <Flights /> },

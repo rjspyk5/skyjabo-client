@@ -1,36 +1,62 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
+import { useAxiosPublic } from "../../hooks/useAxiosPublic";
+import { useAuth } from "../../hooks/useAuth";
+import { useAxiosSequre } from "../../hooks/useAxiosSequre";
+import { curdOperationChecker } from "../../utlis/curdOperationChecker";
 
 export const Bookings = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+  const { id } = useParams();
+  const { user } = useAuth();
+
+  const axiosPublic = useAxiosPublic();
+  const axiosSequre = useAxiosSequre();
+
+  const formatDateTime = (isoDate) => {
+    const date = new Date(isoDate);
+    const formattedDate = date.toISOString().split("T")[0];
+    const formattedTime = date.toTimeString().split(":").slice(0, 2).join(":");
+    return { formattedDate, formattedTime };
+  };
 
   useEffect(() => {
-    const dummyData = {
-      date: "2024-12-15",
-      email: "test@example.com",
-      departureCity: "Dhaka",
-      destinationCity: "New York",
-    };
+    if (id) {
+      axiosPublic.get(`/flight/${id}`).then((data) => {
+        const { formattedDate, formattedTime } = formatDateTime(
+          data?.data?.date
+        );
+        setValue("date", formattedDate);
+        setValue("time", formattedTime);
+        setValue("departureCity", data?.data?.origin);
+        setValue("destinationCity", data?.data?.destination);
+      });
+    }
+    if (user) {
+      axiosSequre
+        .get(`/user/${user?.userId}`)
+        .then((res) => setValue("email", res.data.email));
+    }
+  }, [user, id, axiosPublic, axiosSequre, setValue]);
 
-    setValue("date", dummyData.date);
-    setValue("email", dummyData.email);
-    setValue("departureCity", dummyData.departureCity);
-    setValue("destinationCity", dummyData.destinationCity);
-  }, [setValue]);
-
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const result = await axiosSequre.post("/bookings", data);
+    curdOperationChecker(result);
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-4">
       <div className="max-w-3xl w-full bg-white shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-6">
+        <h2 className="text-3xl font-bold text-center mb-6 text-black">
           Book Your Flight
         </h2>
-
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
@@ -38,12 +64,39 @@ export const Bookings = () => {
               </label>
               <input
                 type="text"
-                {...register("fullName", { required: true })}
-                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("fullName", { required: "Full Name is required" })}
+                className={`input input-bordered w-full bg-gray-100 text-black ${
+                  errors.fullName ? "border-red-500" : ""
+                }`}
                 placeholder="Enter your full name"
               />
+              {errors.fullName && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.fullName.message}
+                </p>
+              )}
             </div>
+            <div>
+              <label className="block font-semibold mb-2 text-black">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                {...register("phone", { required: "Phone Number is required" })}
+                className={`input input-bordered w-full bg-gray-100 text-black ${
+                  errors.phone ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your phone number"
+              />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
+            </div>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
                 Email Address
@@ -53,20 +106,6 @@ export const Bookings = () => {
                 {...register("email")}
                 className="input input-bordered w-full !bg-gray-200 !text-gray-700"
                 disabled
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block font-semibold mb-2 text-black">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                {...register("phone", { required: true })}
-                className="input input-bordered w-full bg-gray-100 text-black"
-                placeholder="Enter your phone number"
               />
             </div>
 
@@ -83,7 +122,6 @@ export const Bookings = () => {
             </div>
           </div>
 
-          {/* Flight Details */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
@@ -96,7 +134,6 @@ export const Bookings = () => {
                 disabled
               />
             </div>
-
             <div>
               <label className="block font-semibold mb-2 text-black">
                 Destination City
@@ -113,53 +150,36 @@ export const Bookings = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
-                Number of Passengers
+                Time of Travel
               </label>
               <input
-                type="number"
-                {...register("passengers", { required: true, min: 1 })}
-                className="input input-bordered w-full bg-gray-100 text-black"
-                placeholder="Enter number of passengers"
+                type="time"
+                {...register("time")}
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                disabled
               />
             </div>
-
             <div>
               <label className="block font-semibold mb-2 text-black">
-                Class
+                Payment Method
               </label>
               <select
-                {...register("class", { required: true })}
+                {...register("paymentMethod", { required: true })}
                 className="select select-bordered w-full bg-gray-100 text-black"
               >
-                <option value="economy">Economy</option>
-                <option value="business">Business</option>
-                <option value="first">First Class</option>
+                <option value="credit-card">Credit/Debit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bank-transfer">Bank Transfer</option>
               </select>
             </div>
           </div>
 
-          {/* Payment Information */}
-          <div>
-            <label className="block font-semibold mb-2 text-black">
-              Payment Method
-            </label>
-            <select
-              {...register("paymentMethod", { required: true })}
-              className="select select-bordered w-full bg-gray-100 text-black"
-            >
-              <option value="credit-card">Credit/Debit Card</option>
-              <option value="paypal">PayPal</option>
-              <option value="bank-transfer">Bank Transfer</option>
-            </select>
-          </div>
-
-          {/* Submit Button */}
-          <div className="pt-6 text-center">
+          <div className="pt-6 text-end">
             <button
               type="submit"
               className="py-2 px-4 rounded-md bg-green-500 text-white w-full md:w-auto"
             >
-              Confirm Booking
+              Confirm
             </button>
           </div>
         </form>
