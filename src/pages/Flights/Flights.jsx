@@ -1,23 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SearchSection } from "../../component/Hero/SearchSection/SearchSection";
 import img from "../../assets/images/low/img (1).jpg";
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { useAxiosSequre } from "../../hooks/useAxiosSequre";
 
 export const Flights = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const axiosSequre = useAxiosSequre();
   const axiosPublic = useAxiosPublic();
+  const [searchParams, setSearchParams] = useState({
+    origin: "",
+    destination: "",
+    date: "",
+  });
+
+  useEffect(() => {
+    const origin = state?.origin || "";
+    const destination = state?.destination || "";
+    const date = state?.date || "";
+    setSearchParams({
+      origin,
+      destination,
+      date,
+    });
+  }, []);
+
   const { data, refetch, isLoading } = useQuery({
-    queryKey: ["flights"],
+    queryKey: ["flights", searchParams],
     queryFn: async () => {
-      const result = await axiosPublic.get("/flights");
-      return result.data;
+      const { origin, destination, date } = searchParams;
+
+      if (origin && destination && date) {
+        const response = await axiosPublic.get("/flights/search", {
+          params: {
+            origin,
+            destination,
+            date,
+          },
+        });
+        return response.data;
+      } else {
+        const response = await axiosPublic.get("/flights");
+        return response.data;
+      }
     },
   });
-  console.log(data);
+
   return (
     <div className="pt-10">
       <dialog id="my_modal_3" className="modal">
@@ -98,7 +129,7 @@ export const Flights = () => {
       </dialog>
 
       <div className="mb-10">
-        <SearchSection />
+        <SearchSection setSearchParams={setSearchParams} />
       </div>
       <div className="flex gap-16">
         {/* Filters Section */}

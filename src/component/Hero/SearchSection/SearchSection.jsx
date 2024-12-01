@@ -2,11 +2,13 @@ import React, { useState, forwardRef } from "react";
 import "../../../Style/style.css";
 import "../Hero.css";
 import { useForm, Controller } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { CustomDatePicker } from "../CustomDatePicker/CustomDatePicker";
 import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
 
-export const SearchSection = () => {
+export const SearchSection = ({ setSearchParams }) => {
+  const { pathname } = useLocation();
+
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const {
@@ -17,7 +19,12 @@ export const SearchSection = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => navigate("/flights", { state: data });
+  const onSubmit = (data) => {
+    if (pathname === "/") {
+      return navigate("/flights", { state: data });
+    }
+    setSearchParams && setSearchParams({ ...data });
+  };
   return (
     <div className="backdrop-blur-lg mt-5">
       <div className="md:p-12 p-8 relative">
