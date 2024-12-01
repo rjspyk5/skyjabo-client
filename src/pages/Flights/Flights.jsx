@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useAxiosSequre } from "../../hooks/useAxiosSequre";
-
+import { FaFilter } from "react-icons/fa";
 export const Flights = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -139,7 +139,7 @@ export const Flights = () => {
         {/* Filters Section */}
         <div className="w-[25%] hidden lg:block space-y-5">
           <div className="flex justify-between p-3 border-b">
-            <h6>Filters</h6>
+            <h6> Filters</h6>
             <span>clear</span>
           </div>
           <div className="p-3 bg-white text-black rounded-lg space-y-3">
@@ -180,9 +180,13 @@ export const Flights = () => {
         {/* Flights List Section */}
         <div className="flex-1">
           <div className="flex justify-between">
-            <button className="btn lg:hidden">Filter</button>
-            <h6 className="text-2xl font-bold p-4">
-              {!isLoading && `${data?.length} Flights Available`}
+            <button className="btn lg:hidden flex justify-center items-center">
+              <FaFilter /> Filter{" "}
+            </button>
+            <h6 className="md:text-2xl  font-bold p-4">
+              {!isLoading && searchParams?.origin
+                ? `${data?.length} flights available based on your search`
+                : "Showing All Flights from our own database"}
             </h6>
             {searchParams?.origin && (
               <p
