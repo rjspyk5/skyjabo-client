@@ -10,6 +10,7 @@ export const Flights = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const axiosSequre = useAxiosSequre();
+  const [clearSearch, setclearSearch] = useState(false);
   const axiosPublic = useAxiosPublic();
   const [searchParams, setSearchParams] = useState({
     origin: "",
@@ -129,7 +130,10 @@ export const Flights = () => {
       </dialog>
 
       <div className="mb-10">
-        <SearchSection setSearchParams={setSearchParams} />
+        <SearchSection
+          setSearchParams={setSearchParams}
+          clearSearch={clearSearch}
+        />
       </div>
       <div className="flex gap-16">
         {/* Filters Section */}
@@ -180,6 +184,17 @@ export const Flights = () => {
             <h6 className="text-2xl font-bold p-4">
               {!isLoading && `${data?.length} Flights Available`}
             </h6>
+            {searchParams?.origin && (
+              <p
+                onClick={() => {
+                  setSearchParams({});
+                  setclearSearch(true);
+                }}
+                className="btn"
+              >
+                clear search
+              </p>
+            )}
           </div>
           {!isLoading &&
             data?.map((flight) => (

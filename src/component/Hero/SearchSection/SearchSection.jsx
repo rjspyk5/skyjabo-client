@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useEffect } from "react";
 import "../../../Style/style.css";
 import "../Hero.css";
 import { useForm, Controller } from "react-hook-form";
@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router";
 import { CustomDatePicker } from "../CustomDatePicker/CustomDatePicker";
 import { GiAirplaneArrival, GiAirplaneDeparture } from "react-icons/gi";
 
-export const SearchSection = ({ setSearchParams }) => {
+export const SearchSection = ({ setSearchParams, clearSearch }) => {
   const { pathname } = useLocation();
 
   const navigate = useNavigate();
@@ -15,9 +15,15 @@ export const SearchSection = ({ setSearchParams }) => {
     control,
     register,
     handleSubmit,
-
+    reset,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (clearSearch) {
+      reset();
+    }
+  }, [clearSearch]);
 
   const onSubmit = (data) => {
     if (pathname === "/") {
