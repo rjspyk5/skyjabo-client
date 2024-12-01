@@ -1,7 +1,7 @@
 import React from "react";
 import { Hero } from "../../component/Hero/Hero";
 import { HowItWork } from "../../component/HowItWork/HowItWork";
-import { WhyUs } from "../../component/WhyUS/WhyUs";
+import { BookNowBanner } from "../../component/BookNowBanner/BookNowBanner";
 import { FAQ } from "../../component/FAQ/FAQ";
 
 export const Home = () => {
@@ -9,8 +9,9 @@ export const Home = () => {
     <div>
       <Hero />
       <HowItWork />
-      <WhyUs />
+
       <FAQ />
+      <BookNowBanner />
     </div>
   );
 };

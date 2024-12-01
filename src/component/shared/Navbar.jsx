@@ -50,7 +50,7 @@ export const Navbar = () => {
     </>
   );
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 !z-50">
       <div className="">
         <div className="drawer">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
