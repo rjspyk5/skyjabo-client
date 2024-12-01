@@ -5,9 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { useAxiosSequre } from "../../hooks/useAxiosSequre";
-import { FaFilter } from "react-icons/fa";
+
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
+import { Filter } from "./Filter";
 export const Flights = () => {
   const navigate = useNavigate();
+  const [priceRange, setPriceRange] = useState([20, 80]);
+  const [availableRange, setavailableRange] = useState([20, 80]);
+  const [durationRange, setDurationRange] = useState([20, 80]);
+
   const { state } = useLocation();
   const axiosSequre = useAxiosSequre();
   const [clearSearch, setclearSearch] = useState(false);
@@ -136,53 +142,47 @@ export const Flights = () => {
         />
       </div>
       <div className="flex gap-16">
-        {/* Filters Section */}
+        {/* Filters Section for large screen */}
         <div className="w-[25%] hidden lg:block space-y-5">
           <div className="flex justify-between p-3 border-b">
             <h6> Filters</h6>
             <span>clear</span>
           </div>
-          <div className="p-3 bg-white text-black rounded-lg space-y-3">
-            <h6>Price</h6>
-            <input
-              type="range"
-              min={0}
-              max="100"
-              defaultValue="40"
-              className="range range-xs"
-            />
-          </div>
-          <div className="p-3 bg-white text-black rounded-lg space-y-3">
-            <h6>Duration</h6>
-            <input
-              type="range"
-              min={0}
-              max="100"
-              defaultValue="40"
-              className="range range-xs"
-            />
-          </div>
-          {/* Airlines */}
-          <div className="p-3 bg-white text-black rounded-lg space-y-3 h-48 overflow-auto">
-            <h6>Airlines</h6>
-            {["Airline 1", "Airline 2", "Airline 3", "Airline 4"].map(
-              (airline, index) => (
-                <div className="form-control" key={index}>
-                  <label className="label py-1 justify-normal space-x-2 cursor-pointer">
-                    <input type="checkbox" className="checkbox" />
-                    <span className="label-text">{airline}</span>
-                  </label>
-                </div>
-              )
-            )}
-          </div>
+          <Filter
+            priceRange={priceRange}
+            setPriceRange={setPriceRange}
+            durationRange={durationRange}
+            setDurationRange={setDurationRange}
+            availableRange={availableRange}
+            setavailableRange={setavailableRange}
+          />
         </div>
         {/* Flights List Section */}
+
         <div className="flex-1">
           <div className="flex justify-between">
-            <button className="btn lg:hidden flex justify-center items-center">
-              <FaFilter /> Filter{" "}
-            </button>
+            <details className="dropdown lg:hidden">
+              <summary className="btn m-1 lg:hidden flex justify-center items-center">
+                {" "}
+                <HiOutlineAdjustmentsHorizontal /> Filter
+              </summary>
+              <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-96 p-2 shadow">
+                {/* Mobile Device Filter Section */}
+
+                <div className="space-y-3 ">
+                  <Filter
+                    priceRange={priceRange}
+                    setPriceRange={setPriceRange}
+                    durationRange={durationRange}
+                    setDurationRange={setDurationRange}
+                    availableRange={availableRange}
+                    setavailableRange={setavailableRange}
+                  />
+                </div>
+                {/* Mobile device Filter Section End */}
+              </ul>
+            </details>
+
             <h6 className="md:text-2xl  font-bold p-4">
               {!isLoading && searchParams?.origin
                 ? `${data?.length} flights available based on your search`
@@ -200,6 +200,7 @@ export const Flights = () => {
               </p>
             )}
           </div>
+
           {!isLoading &&
             data?.map((flight) => (
               <div

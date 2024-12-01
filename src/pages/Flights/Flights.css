@@ -1,0 +1,23 @@
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.custom-checkbox {
+  --chkbg: white;
+  --chkfg: var(--fallback-erc, oklch(var(--erc) / 1));
+  --tw-border-opacity: 1;
+  border-color: black;
+}
+
+
+
