@@ -8,7 +8,7 @@ export const Filter = ({
   durationRange,
   setDurationRange,
   availableRange,
-  setavailableRange,
+  setAvailableRange,
 }) => {
   return (
     <>
@@ -17,43 +17,46 @@ export const Filter = ({
         <RangeSlider
           min={0}
           max={100}
-          defaultValue={priceRange}
-          onInput={setPriceRange}
+          value={priceRange}
+          onInput={(value) => setPriceRange(value)}
         />
         <div className="slider-labels flex justify-between">
           <span>{priceRange[0]}</span>
           <span>{priceRange[1]}</span>
         </div>
       </div>
+
       <div className="p-3 bg-white text-black rounded-lg space-y-3">
         <h6>Duration</h6>
         <RangeSlider
           min={0}
           max={100}
-          defaultValue={durationRange}
-          onInput={setDurationRange}
+          value={durationRange}
+          onInput={(value) => setDurationRange(value)}
         />
         <div className="slider-labels flex justify-between">
           <span>{durationRange[0]}</span>
           <span>{durationRange[1]}</span>
         </div>
       </div>
+
       <div className="p-3 bg-white text-black rounded-lg space-y-3">
         <h6>Available Seats</h6>
         <RangeSlider
           min={0}
           max={100}
-          defaultValue={availableRange}
-          onInput={setavailableRange}
+          value={availableRange}
+          onInput={(value) => setAvailableRange(value)}
         />
         <div className="slider-labels flex justify-between">
           <span>{availableRange[0]}</span>
           <span>{availableRange[1]}</span>
         </div>
       </div>
+
       {/* Airlines */}
       <details className="collapse collapse-open !rounded-lg bg-white collapse-arrow max-h-48 overflow-auto">
-        <summary className="collapse-title  text-black cursor-pointer">
+        <summary className="collapse-title text-black cursor-pointer">
           Airlines
         </summary>
         <div className="collapse-content bg-white text-black rounded-lg space-y-3 ">

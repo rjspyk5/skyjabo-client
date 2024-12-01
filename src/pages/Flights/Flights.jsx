@@ -13,6 +13,7 @@ export const Flights = () => {
   const [priceRange, setPriceRange] = useState([20, 80]);
   const [availableRange, setavailableRange] = useState([20, 80]);
   const [durationRange, setDurationRange] = useState([20, 80]);
+  console.log(availableRange);
 
   const { state } = useLocation();
   const axiosSequre = useAxiosSequre();

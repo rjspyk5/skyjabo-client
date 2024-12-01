@@ -17,6 +17,7 @@ import { Bookings } from "../pages/Bookings/Bookings";
 import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 import { MyBookings } from "../pages/Dashboard/UserDashboard/MyBookings";
 import { FlightDetails } from "../pages/FlightDetails/FlightDetails";
+import { MyProfile } from "../pages/Dashboard/UserDashboard/MyProfile";
 
 export const Routing = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const Routing = createBrowserRouter([
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Registration /> },
       { path: "/book/:id", element: <Bookings /> },
+      { path: "/profile", element: <MyProfile /> },
       {
         path: "/bookings",
         element: (

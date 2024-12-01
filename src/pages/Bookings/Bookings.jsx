@@ -67,7 +67,7 @@ export const Bookings = () => {
     data.numberOfSeats = seats;
     data.totalPrice = Price;
     data.bookingStatus = "pending";
-    console.log(data);
+
     const result = await axiosSequre.post("/bookings", data);
     curdOperationChecker(result);
   };
@@ -104,7 +104,7 @@ export const Bookings = () => {
                 Phone Number
               </label>
               <input
-                type="tel"
+                type="number"
                 {...register("phone", { required: "Phone Number is required" })}
                 className={`input input-bordered w-full bg-gray-100 text-black ${
                   errors.phone ? "border-red-500" : ""
