@@ -13,10 +13,11 @@ export const ManageFlights = () => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["loadAllFlights"],
     queryFn: async () => {
-      const result = await axiosSequre.get("/flights/adminadded");
+      const result = await axiosSequre.get("/admin/flight");
       return result.data;
     },
   });
+  console.log(data);
 
   const handleDelte = async (id) => {
     const result = await Swal.fire({
@@ -66,7 +67,7 @@ export const ManageFlights = () => {
               </tr>
             </thead>
             <tbody>
-              {!isLoading &&
+              {data &&
                 data?.map((flight) => (
                   <tr key={flight._id} className="border-t">
                     <td className="p-2 md:p-4 text-gray-800">
