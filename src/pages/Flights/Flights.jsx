@@ -58,83 +58,6 @@ export const Flights = () => {
 
   return (
     <div className="pt-10">
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box relative max-w-4xl">
-          <button
-            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4"
-            onClick={() => document.getElementById("my_modal_3").close()}
-          >
-            ✕
-          </button>
-
-          <h3 className="font-bold text-2xl text-center mb-4">
-            Flight Details
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Column: Basic Flight Info */}
-            <div className="space-y-3">
-              <p>
-                <span className="font-semibold">Airline:</span> Test Airline 1
-              </p>
-              <p>
-                <span className="font-semibold">Departure Time:</span> 19:00
-              </p>
-              <p>
-                <span className="font-semibold">Arrival Time:</span> 00:15
-              </p>
-              <p>
-                <span className="font-semibold">Duration:</span> 5h 15m
-              </p>
-              <p>
-                <span className="font-semibold">Stops:</span> 1 stop via Goa
-              </p>
-            </div>
-
-            {/* Right Column: Additional Info */}
-            <div className="space-y-3">
-              <p>
-                <span className="font-semibold">Price:</span> $500
-              </p>
-              <p>
-                <span className="font-semibold">Class:</span> Economy
-              </p>
-              <p>
-                <span className="font-semibold">Baggage Allowance:</span> 20kg
-              </p>
-              <p>
-                <span className="font-semibold">Meal:</span> Included
-              </p>
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="mt-6 border-t pt-4">
-            <h4 className="font-bold text-lg mb-2">Description</h4>
-            <p>
-              This flight offers a comfortable journey with complimentary meals,
-              in-flight entertainment, and spacious seating. Enjoy seamless
-              travel with experienced crew and top-tier services.
-            </p>
-          </div>
-
-          <div className="modal-action justify-end mt-6">
-            <button
-              className="btn btn-primary"
-              onClick={() => alert("Booking Confirmed!")}
-            >
-              Confirm Booking
-            </button>
-            <button
-              className="btn btn-secondary"
-              onClick={() => document.getElementById("my_modal_3").close()}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      </dialog>
-
       <div className="mb-10">
         <SearchSection
           setSearchParams={setSearchParams}
@@ -291,9 +214,7 @@ export const Flights = () => {
                 <div className="md:flex md:flex-col gap-1 hidden ">
                   <button
                     className="btn md:btn-md btn-sm"
-                    onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
-                    }
+                    onClick={() => navigate(`/flight/${flight._id}`)}
                   >
                     View Details
                   </button>
@@ -310,9 +231,7 @@ export const Flights = () => {
                   <div className="flex flex-col gap-1">
                     <button
                       className="btn md:btn-md btn-sm"
-                      onClick={() =>
-                        document.getElementById("my_modal_3").showModal()
-                      }
+                      onClick={() => navigate(`/flight/${flight._id}`)}
                     >
                       View Details
                     </button>

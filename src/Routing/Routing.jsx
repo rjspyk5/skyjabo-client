@@ -16,6 +16,7 @@ import { ManageFlights } from "../pages/Dashboard/AdminDashboard/ManageFlights";
 import { Bookings } from "../pages/Bookings/Bookings";
 import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
 import { MyBookings } from "../pages/Dashboard/UserDashboard/MyBookings";
+import { FlightDetails } from "../pages/FlightDetails/FlightDetails";
 
 export const Routing = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export const Routing = createBrowserRouter([
     children: [
       { path: "", element: <Home /> },
       { path: "/flights", element: <Flights /> },
+      { path: "/flight/:id", element: <FlightDetails /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Registration /> },
       { path: "/book/:id", element: <Bookings /> },
