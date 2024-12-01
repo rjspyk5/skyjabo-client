@@ -58,6 +58,7 @@ export const Routing = createBrowserRouter([
       { path: "bookings", element: <AllBookings /> },
       { path: "users", element: <AllUsers /> },
       { path: "flights", element: <ManageFlights /> },
+      { path: "profile", element: <MyProfile /> },
     ],
   },
 ]);

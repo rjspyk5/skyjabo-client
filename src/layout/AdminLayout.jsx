@@ -1,7 +1,7 @@
 import React from "react";
 import { DrawerForAdmin } from "../component/DrawerForAdmin/DrawerForAdmin";
 import { useAuth } from "../hooks/useAuth";
-import { NavLink, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 import logo from "../assets/logo/logoc.png";
 
 export const AdminLayout = () => {
@@ -62,6 +62,19 @@ export const AdminLayout = () => {
           All Users
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/admin/profile"
+          className={({ isActive }) =>
+            `${
+              isActive && "bg-primary !text-white"
+            } hover:bg-primary hover:text-white text-black focus:!bg-primary transition-colors duration-500 ease-linear`
+          }
+          end
+        >
+          Admin Profile
+        </NavLink>
+      </li>
     </>
   );
   return (
@@ -101,11 +114,9 @@ export const AdminLayout = () => {
                 className="menu menu-sm dropdown-content bg-white *:text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
-                  <a>Profile</a>
+                  <Link to="/admin/profile">Profile</Link>
                 </li>
-                <li>
-                  <a>Settings</a>
-                </li>
+
                 <li>
                   <button onClick={logout}>Logout</button>
                 </li>
