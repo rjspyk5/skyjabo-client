@@ -36,14 +36,14 @@ export const Navbar = () => {
       {user && (
         <li>
           <NavLink
-            to="/dashboard"
+            to="/bookings"
             className={({ isActive }) =>
               isActive
                 ? "bg-primary font-bold text-white"
                 : "font-bold text-white"
             }
           >
-            Dashboard
+            My Bookings
           </NavLink>
         </li>
       )}

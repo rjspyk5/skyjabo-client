@@ -17,7 +17,6 @@ export const ManageFlights = () => {
       return result.data;
     },
   });
-  console.log(data);
 
   const handleDelte = async (id) => {
     const result = await Swal.fire({

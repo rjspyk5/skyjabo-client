@@ -80,7 +80,6 @@ export const Flights = () => {
             </p>
           </div>
 
-          {/* CTA Buttons */}
           <div className="modal-action justify-end mt-6">
             <button
               className="btn btn-primary"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 import { useAxiosPublic } from "../../hooks/useAxiosPublic";
@@ -19,6 +19,10 @@ export const Bookings = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSequre = useAxiosSequre();
 
+  const [Price, setPrice] = useState(0);
+  const [seats, setSeats] = useState(1);
+  const [initialPrice, setinitialPrice] = useState(0);
+
   const formatDateTime = (isoDate) => {
     const date = new Date(isoDate);
     const formattedDate = date.toISOString().split("T")[0];
@@ -36,16 +40,34 @@ export const Bookings = () => {
         setValue("time", formattedTime);
         setValue("departureCity", data?.data?.origin);
         setValue("destinationCity", data?.data?.destination);
+        setPrice(data?.data?.price || 0);
+        setinitialPrice(data?.data?.price || 0);
       });
     }
+
     if (user) {
-      axiosSequre
-        .get(`/user/${user?.userId}`)
-        .then((res) => setValue("email", res.data.email));
+      axiosSequre.get(`/user/${user?.userId}`).then((res) => {
+        setValue("email", res.data.email);
+      });
     }
-  }, [user, id, axiosPublic, axiosSequre, setValue]);
+  }, []);
+
+  const handleIncrement = () => {
+    setSeats((prev) => prev + 1);
+    setPrice((prev) => prev + initialPrice);
+  };
+  const handleDecrement = () => {
+    setSeats((prev) => (prev > 1 ? prev - 1 : 1));
+    setPrice((prev) => (seats > 1 ? prev - initialPrice : initialPrice));
+  };
 
   const onSubmit = async (data) => {
+    data.flightId = id;
+    data.userId = user.userId;
+    data.numberOfSeats = seats;
+    data.totalPrice = Price;
+    data.bookingStatus = "pending";
+    console.log(data);
     const result = await axiosSequre.post("/bookings", data);
     curdOperationChecker(result);
   };
@@ -57,6 +79,7 @@ export const Bookings = () => {
           Book Your Flight
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Previous Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
@@ -64,15 +87,15 @@ export const Bookings = () => {
               </label>
               <input
                 type="text"
-                {...register("fullName", { required: "Full Name is required" })}
+                {...register("name", { required: "Full Name is required" })}
                 className={`input input-bordered w-full bg-gray-100 text-black ${
-                  errors.fullName ? "border-red-500" : ""
+                  errors.name ? "border-red-500" : ""
                 }`}
                 placeholder="Enter your full name"
               />
-              {errors.fullName && (
+              {errors.name && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.fullName.message}
+                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -108,7 +131,6 @@ export const Bookings = () => {
                 disabled
               />
             </div>
-
             <div>
               <label className="block font-semibold mb-2 text-black">
                 Date of Travel
@@ -147,30 +169,47 @@ export const Bookings = () => {
             </div>
           </div>
 
+          {/* New Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
-                Time of Travel
+                Number of Seats
               </label>
-              <input
-                type="time"
-                {...register("time")}
-                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
-                disabled
-              />
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleDecrement}
+                  className="btn btn-outline btn-sm"
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  value={seats}
+                  readOnly
+                  className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                />
+                <button
+                  type="button"
+                  onClick={handleIncrement}
+                  className="btn btn-outline btn-sm"
+                >
+                  +
+                </button>
+              </div>
             </div>
+
             <div>
               <label className="block font-semibold mb-2 text-black">
-                Payment Method
+                Total Price
               </label>
-              <select
-                {...register("paymentMethod", { required: true })}
-                className="select select-bordered w-full bg-gray-100 text-black"
-              >
-                <option value="credit-card">Credit/Debit Card</option>
-                <option value="paypal">PayPal</option>
-                <option value="bank-transfer">Bank Transfer</option>
-              </select>
+              <input
+                type="text"
+                {...register("totalPrice")}
+                value={Price}
+                disabled
+                className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+              />
             </div>
           </div>
 
