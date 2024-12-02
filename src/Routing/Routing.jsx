@@ -34,8 +34,22 @@ export const Routing = createBrowserRouter([
       { path: "/flight/:id", element: <FlightDetails /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Registration /> },
-      { path: "/book/:id", element: <Bookings /> },
-      { path: "/profile", element: <MyProfile /> },
+      {
+        path: "/book/:id",
+        element: (
+          <PrivateRoute>
+            <Bookings />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/bookings",
         element: (
@@ -50,7 +64,6 @@ export const Routing = createBrowserRouter([
     path: "admin",
     element: (
       <AdminRoute>
-        {" "}
         <AdminLayout />
       </AdminRoute>
     ),

@@ -3,6 +3,7 @@ import { DrawerForAdmin } from "../component/DrawerForAdmin/DrawerForAdmin";
 import { useAuth } from "../hooks/useAuth";
 import { Link, NavLink, Outlet } from "react-router";
 import logo from "../assets/logo/logoc.png";
+import profile from "../assets/images/profile.jpg";
 
 export const AdminLayout = () => {
   const { user, logout } = useAuth();
@@ -103,10 +104,7 @@ export const AdminLayout = () => {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  />
+                  <img alt="profile" src={profile} />
                 </div>
               </div>
               <ul

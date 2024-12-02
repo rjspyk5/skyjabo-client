@@ -48,6 +48,20 @@ export const Navbar = () => {
           </NavLink>
         </li>
       )}
+      {user && (
+        <li>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              isActive
+                ? "bg-primary font-bold text-white"
+                : "font-bold text-white"
+            }
+          >
+            My Profile
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
