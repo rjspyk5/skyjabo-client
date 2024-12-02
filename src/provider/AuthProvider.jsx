@@ -13,21 +13,20 @@ export const AuthProvider = ({ children }) => {
     const authStateChanged = async () => {
       try {
         setloading(true);
-        const { data: logedUser } = await axiosPublic.get("/authstate");
-        const { userId, role } = logedUser;
+        const { data: loggedInUser } = await axiosPublic.get("/authstate");
+        const { userId, role } = loggedInUser;
         setuser({ userId, role });
       } catch (error) {
-        console.log(error);
-        if (error.status === 403) {
-          return setuser(null);
+        if (error.response?.status === 403) {
+          setuser(null);
+        } else {
+          setuser(null);
         }
-
-        console.log("Can't check authState");
-        setuser(null);
       } finally {
         setloading(false);
       }
     };
+
     return () => {
       authStateChanged();
     };
