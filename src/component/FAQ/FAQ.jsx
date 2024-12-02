@@ -3,16 +3,16 @@ import React from "react";
 export const FAQ = () => {
   return (
     <div>
-      <div className="p-8">
-        <div className="bg-white p-4 rounded-lg shadow-xl py-8 mt-12">
-          <h4 className="text-4xl font-bold text-gray-800 tracking-widest uppercase text-center">
+      <div className="">
+        <div className=" rounded-lg shadow-xl py-8 mt-12">
+          <h4 className="text-4xl font-bold  tracking-widest uppercase text-center">
             FAQ
           </h4>
-          <p className="text-center text-gray-600 text-sm mt-2">
+          <p className="text-center  text-sm mt-2">
             Here are some of the frequently asked questions
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-12 px-2 xl:px-12 mt-4">
-            <div className="flex space-x-8 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-10 px-2 mt-4">
+            <div className="flex space-x-4 mt-8">
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -32,22 +32,15 @@ export const FAQ = () => {
                 </svg>
               </div>
               <div>
-                <h4 className="text-xl font-bold text-gray-700">
+                <h4 className="text-xl font-bold ">
                   How do I book a flight on your platform?
                 </h4>
-                <p className="text-gray-600 my-2">
+                <p className=" my-2">
                   To book a flight, simply search for your desired destination,
                   select the flight, and proceed to payment. Our platform
                   provides a seamless booking experience with instant
                   confirmation.
                 </p>
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 hover:underline capitalize"
-                  title="Read More"
-                >
-                  Read More
-                </a>
               </div>
             </div>
 
@@ -69,21 +62,14 @@ export const FAQ = () => {
                 </svg>
               </div>
               <div>
-                <h4 className="text-xl font-bold text-gray-700">
+                <h4 className="text-xl font-bold  ">
                   Can I change or cancel my booking?
                 </h4>
-                <p className="text-gray-600 my-2">
+                <p className="  my-2">
                   Yes, you can change or cancel your booking through your
                   account dashboard. Please note that cancellation fees may
                   apply depending on the airline’s policy.
                 </p>
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 hover:underline capitalize"
-                  title="Read More"
-                >
-                  Read More
-                </a>
               </div>
             </div>
 
@@ -105,20 +91,13 @@ export const FAQ = () => {
                 </svg>
               </div>
               <div>
-                <h4 className="text-xl font-bold text-gray-700">
+                <h4 className="text-xl font-bold  ">
                   What are the payment options available?
                 </h4>
-                <p className="text-gray-600 my-2">
+                <p className="  my-2">
                   We accept a variety of payment options, including credit/debit
                   cards, PayPal, and bank transfers for your convenience.
                 </p>
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 hover:underline capitalize"
-                  title="Read More"
-                >
-                  Read More
-                </a>
               </div>
             </div>
 
@@ -140,21 +119,14 @@ export const FAQ = () => {
                 </svg>
               </div>
               <div>
-                <h4 className="text-xl font-bold text-gray-700">
+                <h4 className="text-xl font-bold  ">
                   Are there any additional fees for booking?
                 </h4>
-                <p className="text-gray-600 my-2">
+                <p className="  my-2">
                   In addition to the flight cost, there may be service fees,
                   taxes, and baggage fees depending on the airline and your
                   booking.
                 </p>
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 hover:underline capitalize"
-                  title="Read More"
-                >
-                  Read More
-                </a>
               </div>
             </div>
 
@@ -176,20 +148,13 @@ export const FAQ = () => {
                 </svg>
               </div>
               <div>
-                <h4 className="text-xl font-bold text-gray-700">
+                <h4 className="text-xl font-bold  ">
                   How can I contact customer support?
                 </h4>
-                <p className="text-gray-600 my-2">
+                <p className="  my-2">
                   You can contact our customer support team via email or live
                   chat available on our website 24/7.
                 </p>
-                <a
-                  href="#"
-                  className="text-blue-600 hover:text-blue-800 hover:underline capitalize"
-                  title="Read More"
-                >
-                  Read More
-                </a>
               </div>
             </div>
           </div>

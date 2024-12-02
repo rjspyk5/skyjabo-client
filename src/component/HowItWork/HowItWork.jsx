@@ -14,8 +14,7 @@ export const HowItWork = () => {
               Search Flights
             </h3>
             <p className="text-gray-600 text-sm text-center">
-              Explore and compare flights to find the best options for your
-              trip.
+              Explore flights to find the best options for your trip.
             </p>
           </div>
         </div>

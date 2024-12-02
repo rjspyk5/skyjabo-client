@@ -148,7 +148,7 @@ export const Registration = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full py-3 bg-[#1E69FF] text-white font-bold rounded-lg"
+                className="w-full py-2.5 px-4 cursor-pointer text-sm font-semibold  rounded text-white bg-primary hover:bg-[#fb3b8e] focus:outline-none"
               >
                 Sign up
               </button>

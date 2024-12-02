@@ -5,14 +5,14 @@ export const curdOperationChecker = (result) => {
     return Swal.fire({
       icon: "success",
       title: result?.data?.message,
-      showConfirmButton: false,
+
       timer: 1500,
     });
   } else {
     return Swal.fire({
       icon: "error",
       title: result?.data?.message,
-      showConfirmButton: false,
+
       timer: 1500,
     });
   }

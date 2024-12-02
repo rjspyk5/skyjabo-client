@@ -71,7 +71,7 @@ export const Navbar = () => {
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content flex flex-col">
             {/* Navbar */}
-            <div className="navbar justify-between ] bg-[#3d3d3d49] backdrop-blur absolute w-full">
+            <div className="navbar justify-between ] bg-[#3d3d3d49] backdrop-blur  md:px-[4%] absolute w-full">
               <div className="flex-none lg:hidden">
                 <label
                   htmlFor="my-drawer-3"
@@ -99,10 +99,7 @@ export const Navbar = () => {
                 </Link>
               </div>
               <div className="hidden flex-none lg:block">
-                <ul className="menu menu-horizontal space-x-2">
-                  {/* Navbar menu content here */}
-                  {menu}
-                </ul>
+                <ul className="menu menu-horizontal space-x-2">{menu}</ul>
               </div>
               {user ? (
                 <div className="dropdown dropdown-end">

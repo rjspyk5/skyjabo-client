@@ -3,6 +3,7 @@ import { useAxiosSequre } from "../../../hooks/useAxiosSequre";
 import { useAuth } from "../../../hooks/useAuth";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 import Swal from "sweetalert2";
+import { Loading } from "../../../component/Loading/Loading";
 
 export const MyBookings = () => {
   const { user } = useAuth();
@@ -18,7 +19,7 @@ export const MyBookings = () => {
       showCancelButton: true,
       confirmButtonColor: "#00bf4c",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, cancel it!",
     });
     try {
       if (result.isConfirmed) {
@@ -61,35 +62,30 @@ export const MyBookings = () => {
   }, [handleCancel]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="text-xl text-gray-700">Loading bookings...</div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
-    <div className="min-h-screen bg-pink-100">
-      {/* Hero Section */}
-      <section className="bg-pink-600 w-full py-16 text-center text-white">
+    <div className="min-h-[400px] ">
+      <section className=" w-full pb-10 pt-20 text-center text-white">
         <h1 className="text-4xl font-semibold mb-4">My Bookings</h1>
         <p className="text-lg">Manage flight bookings</p>
       </section>
 
-      {/* Bookings List Section */}
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto pb-8 px-4">
         <div className="overflow-x-auto bg-white rounded-lg shadow-xl">
           <table className="table-auto w-full text-left text-gray-800">
-            <thead className="bg-pink-600 text-white">
+            <thead className="bg-gray-600 text-white">
               <tr>
-                <th className="py-3 px-6">Booking ID</th>
-                <th className="py-3 px-6">Customer Name</th>
-                <th className="py-3 px-6">Flight</th>
-                <th className="py-3 px-6">Date & Time</th>
-                <th className="py-3 px-6">Seats</th>
-                <th className="py-3 px-6">Total Price</th>
-                <th className="py-3 px-6">Status</th>
-                <th className="py-3 px-6">Action</th>
+                <th className="py-2 px-2">Booking ID</th>
+                <th className="py-2 px-2">Customer Name</th>
+                <th className="py-2 px-2">Flight Name</th>
+                <th className="py-2 px-2">Route</th>
+                <th className="py-2 px-2">Date & Time</th>
+                <th className="py-2 px-2">Seats</th>
+                <th className="py-2 px-2">Total Price</th>
+                <th className="py-2 px-2">Status</th>
+                <th className="py-2 px-2">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -102,48 +98,45 @@ export const MyBookings = () => {
               ) : (
                 bookings.map((booking) => (
                   <tr key={booking._id} className="border-b hover:bg-pink-100">
-                    <td className="py-4 px-6">{booking._id}</td>
-                    <td className="py-4 px-6">{booking.name}</td>
-                    <td className="py-4 px-6">
-                      {booking.flightDetails.airline} (
-                      {booking.flightDetails.flightNumber})<br />
+                    <td className="py-2 px-2">{booking._id}</td>
+                    <td className="py-2 px-2">{booking.name}</td>
+                    <td className="py-2 px-2">
+                      {booking.flightDetails.airline}
+                    </td>
+                    <td className="py-2 px-2">
                       {booking.flightDetails.origin} to{" "}
                       {booking.flightDetails.destination}
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-2 px-2">
                       {new Date(
                         booking.flightDetails.date
                       ).toLocaleDateString()}{" "}
                       {booking.flightDetails.time}
                     </td>
-                    <td className="py-4 px-6">{booking.numberOfSeats}</td>
-                    <td className="py-4 px-6">
+                    <td className="py-2 px-2">{booking.numberOfSeats}</td>
+                    <td className="py-2 px-2">
                       ${booking.totalPrice.toFixed(2)}
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-2 px-2">
                       <span
-                        className={`px-4 py-2 rounded-full text-white ${
+                        className={`px-2 py-2 rounded-full  ${
                           booking.bookingStatus === "confirmed"
-                            ? "bg-green-500"
+                            ? "text-green-500"
                             : booking.bookingStatus === "pending"
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
+                            ? "text-yellow-500"
+                            : "text-red-500"
                         }`}
                       >
                         {booking.bookingStatus}
                       </span>
                     </td>
-                    <td className="py-4 px-6">
-                      {booking.bookingStatus === "pending" ? (
+                    <td className="py-2 px-2">
+                      {booking.bookingStatus === "pending" && (
                         <button
-                          className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
+                          className="bg-red-600 text-white px-2 py-2 rounded-md hover:bg-red-700 transition"
                           onClick={() => handleCancel(booking._id)}
                         >
                           Cancel
-                        </button>
-                      ) : (
-                        <button className="bg-pink-600 text-white px-4 py-2 rounded-md hover:bg-pink-700 transition">
-                          View
                         </button>
                       )}
                     </td>

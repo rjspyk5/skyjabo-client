@@ -8,9 +8,10 @@ export const Home = () => {
   return (
     <div>
       <Hero />
-      <HowItWork />
-
-      <FAQ />
+      <div className="max-w-[1200px] px-10 mx-auto">
+        <HowItWork />
+        <FAQ />
+      </div>
       <BookNowBanner />
     </div>
   );

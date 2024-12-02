@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useAxiosPublic } from "../../hooks/useAxiosPublic";
 import { useAuth } from "../../hooks/useAuth";
 import { useAxiosSequre } from "../../hooks/useAxiosSequre";
@@ -15,6 +15,7 @@ export const Bookings = () => {
   } = useForm();
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const axiosPublic = useAxiosPublic();
   const axiosSequre = useAxiosSequre();
@@ -67,19 +68,18 @@ export const Bookings = () => {
     data.numberOfSeats = seats;
     data.totalPrice = Price;
     data.bookingStatus = "pending";
-
     const result = await axiosSequre.post("/bookings", data);
     curdOperationChecker(result);
+    navigate("/bookings");
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen  bg-gray-100 flex items-center justify-center pb-10 pt-20 px-4">
       <div className="max-w-3xl w-full bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center mb-6 text-black">
           Book Your Flight
         </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          {/* Previous Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
@@ -169,7 +169,6 @@ export const Bookings = () => {
             </div>
           </div>
 
-          {/* New Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block font-semibold mb-2 text-black">
@@ -179,7 +178,7 @@ export const Bookings = () => {
                 <button
                   type="button"
                   onClick={handleDecrement}
-                  className="btn btn-outline btn-sm"
+                  className="btn btn-outline btn-sm !bg-gray-200 !text-gray-700"
                 >
                   -
                 </button>
@@ -187,12 +186,12 @@ export const Bookings = () => {
                   type="number"
                   value={seats}
                   readOnly
-                  className="input input-bordered w-full !bg-gray-200 !text-gray-700"
+                  className="input input-bordered w-full !bg-gray-200 text-center !text-gray-700"
                 />
                 <button
                   type="button"
                   onClick={handleIncrement}
-                  className="btn btn-outline btn-sm"
+                  className="btn btn-outline btn-sm !bg-gray-200 !text-gray-700"
                 >
                   +
                 </button>
