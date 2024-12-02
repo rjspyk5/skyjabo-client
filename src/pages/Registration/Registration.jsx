@@ -99,7 +99,6 @@ export const Registration = () => {
               )}
             </div>
 
-            {/* Email Field */}
             <div className="mt-6">
               <div className="relative flex items-center">
                 <input
@@ -123,7 +122,6 @@ export const Registration = () => {
               )}
             </div>
 
-            {/* Password Field */}
             <div className="mt-6">
               <div className="relative flex items-center">
                 <input

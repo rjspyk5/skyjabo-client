@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useAxiosPublic } from "../hooks/useAxiosPublic";
+import { useNavigate } from "react-router";
 
 export const AuthContext = createContext(null);
 
@@ -38,7 +39,7 @@ export const AuthProvider = ({ children }) => {
     setloading(true);
     await axiosPublic.post("/logout", user);
     setuser(null);
-    window.location.reload();
+    window.location.href = "/login";
   };
 
   return (

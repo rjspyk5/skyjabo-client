@@ -1,11 +1,13 @@
 import React from "react";
 import img from "../../assets/images/low/img (19).jpg";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useAxiosPublic } from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,8 +17,20 @@ export const Login = () => {
   const onSubmit = async (data) => {
     const result = await axiosPublic.post("/login", data);
     if (result.status === 200) {
-      console.log("test");
+      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: result?.data?.message,
+        timer: 1500,
+      });
+
       window.location.reload();
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: result?.data?.message,
+        timer: 1500,
+      });
     }
 
     console.log(result.data);
@@ -41,54 +55,74 @@ export const Login = () => {
             </div>
 
             <div>
-              <div className="relative flex items-center">
-                <input
-                  name="email"
-                  type="text"
-                  {...register("email")}
-                  required
-                  className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
-                  placeholder="Enter email"
-                />
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="#333"
-                  stroke="#333"
-                  className="w-[18px] h-[18px] absolute right-2"
-                  viewBox="0 0 682.667 682.667"
-                >
-                  <defs>
-                    <clipPath id="a" clipPathUnits="userSpaceOnUse">
-                      <path d="M0 512h512V0H0Z" data-original="#000000"></path>
-                    </clipPath>
-                  </defs>
-                  <g
-                    clipPath="url(#a)"
-                    transform="matrix(1.33 0 0 -1.33 0 682.667)"
+              <div className="mt-6">
+                <div className="relative flex items-center">
+                  <input
+                    name="email"
+                    type="text"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value:
+                          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Please enter a valid email address",
+                      },
+                    })}
+                    className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
+                    placeholder="Enter email"
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="#333"
+                    stroke="#333"
+                    className="w-[18px] h-[18px] absolute right-2"
+                    viewBox="0 0 682.667 682.667"
                   >
-                    <path
-                      fill="none"
-                      strokeMiterlimit="10"
-                      strokeWidth="40"
-                      d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
-                      data-original="#000000"
-                    ></path>
-                    <path
-                      d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
-                      data-original="#000000"
-                    ></path>
-                  </g>
-                </svg>
+                    <defs>
+                      <clipPath id="a" clipPathUnits="userSpaceOnUse">
+                        <path
+                          d="M0 512h512V0H0Z"
+                          data-original="#000000"
+                        ></path>
+                      </clipPath>
+                    </defs>
+                    <g
+                      clipPath="url(#a)"
+                      transform="matrix(1.33 0 0 -1.33 0 682.667)"
+                    >
+                      <path
+                        fill="none"
+                        strokeMiterlimit="10"
+                        strokeWidth="40"
+                        d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
+                        data-original="#000000"
+                      ></path>
+                      <path
+                        d="M472 274.9V107.999c0-11.027-8.972-20-20-20H60c-11.028 0-20 8.973-20 20V274.9L0 304.652V107.999c0-33.084 26.916-60 60-60h392c33.084 0 60 26.916 60 60v196.653Z"
+                        data-original="#000000"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                {errors.email && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
             </div>
-
             <div className="mt-6">
               <div className="relative flex items-center">
                 <input
                   name="password"
                   type="password"
-                  required
-                  {...register("password")}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters long",
+                    },
+                  })}
                   className="bg-transparent w-full text-sm text-gray-800 border-b border-gray-400 focus:border-gray-800 px-2 py-3 outline-none placeholder:text-gray-800"
                   placeholder="Enter password"
                 />
@@ -105,6 +139,11 @@ export const Login = () => {
                   ></path>
                 </svg>
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
             <div className="mt-12">
