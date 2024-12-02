@@ -3,6 +3,7 @@ import { DashboardSectionHeader } from "./DashboardSectionHeader";
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSequre } from "../../../hooks/useAxiosSequre";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
+import Swal from "sweetalert2";
 
 export const AllBookings = () => {
   const axiosSequre = useAxiosSequre();
@@ -20,17 +21,47 @@ export const AllBookings = () => {
   });
 
   const handleCancel = async (id) => {
-    const result = await axiosSequre.put(`/bookings/${id}`, {
-      bookingStatus: "cancelled",
+    const result = await Swal.fire({
+      title: "Are you sure you want to cancel?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00bf4c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
     });
-    curdOperationChecker(result);
-    refetch();
+    try {
+      if (result.isConfirmed) {
+        const result = await axiosSequre.put(`/bookings/${id}`, {
+          bookingStatus: "cancelled",
+        });
+        curdOperationChecker(result);
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error canceling the booking:", error);
+    }
   };
 
   const handleDelete = async (id) => {
-    const result = await axiosSequre.delete(`/bookings/${id}`);
-    curdOperationChecker(result);
-    refetch();
+    const result = await Swal.fire({
+      title: "Are you sure you want to Delete?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00bf4c",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    try {
+      if (result.isConfirmed) {
+        const result = await axiosSequre.delete(`/bookings/${id}`);
+        curdOperationChecker(result);
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error deleting the booking:", error);
+    }
   };
 
   const handleConfirm = async (id) => {
