@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo/logoc.png";
+import img from "../../assets/images/profile.jpg";
 import "../../Style/style.css";
 import { Link, NavLink } from "react-router";
 import { useAuth } from "./../../hooks/useAuth";
@@ -97,10 +98,7 @@ export const Navbar = () => {
                     className="btn btn-ghost btn-circle avatar"
                   >
                     <div className="w-10 rounded-full">
-                      <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                      />
+                      <img alt="Tailwind CSS Navbar component" src={img} />
                     </div>
                   </div>
                   <ul

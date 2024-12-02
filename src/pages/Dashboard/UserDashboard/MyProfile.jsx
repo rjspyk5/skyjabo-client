@@ -1,51 +1,54 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useAxiosSequre } from "../../../hooks/useAxiosSequre";
+import { useAuth } from "../../../hooks/useAuth";
+import img from "../../../assets/images/profile.jpg";
 
 export const MyProfile = () => {
-  const [user, setUser] = useState({
-    name: "Rakibul Hasan",
-    phone: "+880 123 456 789",
-    email: "rakibul@example.com",
-    icon: "https://via.placeholder.com/150",
-  });
-
+  const axiosSequre = useAxiosSequre();
+  const { user } = useAuth();
+  const [userDetails, setUserDEtails] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm({
-    defaultValues: user,
+    defaultValues: userDetails,
   });
-
   const toggleEdit = () => {
     setIsEditing(!isEditing);
-    reset(user);
+    reset(userDetails);
   };
-
-  const onSubmit = (data) => {
-    console.log(data);
-    setUser({ ...user, ...data });
-    console.log("Updated user details:", data);
+  const onSubmit = (formData) => {
+    setUser({ ...userDetails, ...formData });
     setIsEditing(false);
   };
 
+  const { data, refetch, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const result = await axiosSequre.get(`/user/${user.userId}`);
+      setUserDEtails(result?.data);
+      return result.data;
+    },
+  });
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-4xl w-full p-8">
-        <div className="bg-white shadow-lg rounded-lg p-10 flex flex-col items-center">
+    <div className="min-h-screen flex items-center justify-center pt-16">
+      <div className="max-w-4xl w-full p-5">
+        <div className="bg-white shadow-lg rounded-lg p-5 flex flex-col items-center">
           <img
-            src={user.icon}
+            src={img}
             alt="Profile"
-            className="w-36 h-36 rounded-full border-4 border-blue-500 mb-6"
+            className="w-32 h-32 rounded-full border-4 border-primary mb-6"
           />
-          <h1 className="text-4xl font-bold text-gray-900">{user.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{data?.name}</h1>
 
           <button
             onClick={toggleEdit}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-pink-600"
           >
             {isEditing ? "Cancel" : "Edit Profile"}
           </button>
@@ -91,14 +94,13 @@ export const MyProfile = () => {
                 )}
               </div>
 
-              {/* Email (Non-editable) */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Email
                 </label>
                 <input
                   type="email"
-                  value={user.email}
+                  value={data.email}
                   disabled
                   className="mt-1 p-2 w-full bg-gray-200 border rounded-md text-gray-500 cursor-not-allowed"
                 />
@@ -118,12 +120,12 @@ export const MyProfile = () => {
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white shadow-md rounded-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800">Phone</h2>
-              <p className="mt-4 text-gray-600">{user.phone}</p>
+              <p className="mt-4 text-gray-600">{data?.phone}</p>
             </div>
 
             <div className="bg-white shadow-md rounded-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800">Email</h2>
-              <p className="mt-4 text-gray-600">{user.email}</p>
+              <p className="mt-4 text-gray-600">{data?.email}</p>
             </div>
           </div>
         )}
