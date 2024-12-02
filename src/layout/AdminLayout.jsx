@@ -50,19 +50,7 @@ export const AdminLayout = () => {
           All Bookings
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/admin/users"
-          className={({ isActive }) =>
-            `${
-              isActive && "bg-primary !text-white"
-            } hover:bg-primary hover:text-white text-black focus:!bg-primary transition-colors duration-500 ease-linear`
-          }
-          end
-        >
-          All Users
-        </NavLink>
-      </li>
+
       <li>
         <NavLink
           to="/admin/profile"

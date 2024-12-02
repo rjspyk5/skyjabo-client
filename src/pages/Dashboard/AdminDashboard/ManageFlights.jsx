@@ -7,6 +7,7 @@ import { useAxiosSequre } from "./../../../hooks/useAxiosSequre";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 import Swal from "sweetalert2";
 import { ModallForEditFlight } from "../../../component/ModalForEditFlight/ModalForEditFlight";
+import { Loading } from "../../../component/Loading/Loading";
 
 export const ManageFlights = () => {
   const axiosSequre = useAxiosSequre();
@@ -50,66 +51,73 @@ export const ManageFlights = () => {
         </div>
 
         <ModallForFlightCreate htmlfor="my_modal_6" refetch={refetch} />
-
-        <div className="overflow-x-auto">
-          <table className="table w-full table-auto bg-white shadow rounded-lg">
-            <thead>
-              <tr className="bg-primary text-white">
-                <th className="p-2 md:p-4 text-left">Flight #</th>
-                <th className="p-2 md:p-4 text-left">Airline</th>
-                <th className="p-2 md:p-4 text-left">Origin</th>
-                <th className="p-2 md:p-4 text-left">Destination</th>
-                <th className="p-2 md:p-4 text-left">Date</th>
-                <th className="p-2 md:p-4 text-left">Time</th>
-                <th className="p-2 md:p-4 text-left">Price</th>
-                <th className="p-2 md:p-4 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data &&
-                data?.map((flight) => (
-                  <tr key={flight._id} className="border-t">
-                    <td className="p-2 md:p-4 text-gray-800">
-                      {flight.flightNumber}
-                    </td>
-                    <td className="p-2 md:p-4 text-gray-800">
-                      {flight.airline}
-                    </td>
-                    <td className="p-2 md:p-4 text-gray-800">
-                      {flight.origin}
-                    </td>
-                    <td className="p-2 md:p-4 text-gray-800">
-                      {flight.destination}
-                    </td>
-                    <td className="p-2 md:p-4 text-gray-800">{flight.date}</td>
-                    <td className="p-2 md:p-4 text-gray-800">{flight.time}</td>
-                    <td className="p-2 md:p-4 text-gray-800">
-                      ${flight.price}
-                    </td>
-                    <td className="p-2 md:p-4 space-x-2 flex">
-                      <label
-                        htmlFor="my_modal_7"
-                        className="btn btn-sm bg-info border-none text-white"
-                      >
-                        Edit
-                      </label>
-                      <ModallForEditFlight
-                        htmlfor="my_modal_7"
-                        refetch={refetch}
-                        data={flight}
-                      />
-                      <button
-                        onClick={() => handleDelte(flight._id)}
-                        className="btn btn-sm bg-red-500 border-none text-white"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="table w-full table-auto bg-white shadow rounded-lg">
+              <thead>
+                <tr className="bg-primary text-white">
+                  <th className="p-2 md:p-4 text-left">Flight #</th>
+                  <th className="p-2 md:p-4 text-left">Airline</th>
+                  <th className="p-2 md:p-4 text-left">Origin</th>
+                  <th className="p-2 md:p-4 text-left">Destination</th>
+                  <th className="p-2 md:p-4 text-left">Date</th>
+                  <th className="p-2 md:p-4 text-left">Time</th>
+                  <th className="p-2 md:p-4 text-left">Price</th>
+                  <th className="p-2 md:p-4 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data &&
+                  data?.map((flight) => (
+                    <tr key={flight._id} className="border-t">
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.flightNumber}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.airline}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.origin}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.destination}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.date}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        {flight.time}
+                      </td>
+                      <td className="p-2 md:p-4 text-gray-800">
+                        ${flight.price}
+                      </td>
+                      <td className="p-2 md:p-4 space-x-2 flex">
+                        <label
+                          htmlFor="my_modal_7"
+                          className="btn btn-sm bg-info border-none text-white"
+                        >
+                          Edit
+                        </label>
+                        <ModallForEditFlight
+                          htmlfor="my_modal_7"
+                          refetch={refetch}
+                          data={flight}
+                        />
+                        <button
+                          onClick={() => handleDelte(flight._id)}
+                          className="btn btn-sm bg-red-500 border-none text-white"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
     </main>
   );

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSequre } from "../../../hooks/useAxiosSequre";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 import Swal from "sweetalert2";
+import { Loading } from "../../../component/Loading/Loading";
 
 export const AllBookings = () => {
   const axiosSequre = useAxiosSequre();
@@ -77,7 +78,7 @@ export const AllBookings = () => {
       <section className="mb-12">
         <DashboardSectionHeader heading="All Bookings" />
         {isLoading ? (
-          <h1>Loading....</h1>
+          <Loading />
         ) : (
           <div className="overflow-x-auto">
             <table className="table w-full table-auto bg-white shadow rounded-lg">

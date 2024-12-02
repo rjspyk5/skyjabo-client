@@ -11,7 +11,7 @@ import { AdminLayout } from "../layout/AdminLayout";
 import { AdminChecker } from "./AdminChecker";
 import { AdminRoute } from "./AdminRoute";
 import { AllBookings } from "../pages/Dashboard/AdminDashboard/AllBookings";
-import { AllUsers } from "../pages/Dashboard/AdminDashboard/AllUsers";
+
 import { ManageFlights } from "../pages/Dashboard/AdminDashboard/ManageFlights";
 import { Bookings } from "../pages/Bookings/Bookings";
 import { ErrorPage } from "../pages/ErrorPage/ErrorPage";
@@ -69,7 +69,7 @@ export const Routing = createBrowserRouter([
     ),
     children: [
       { path: "bookings", element: <AllBookings /> },
-      { path: "users", element: <AllUsers /> },
+
       { path: "flights", element: <ManageFlights /> },
       { path: "profile", element: <MyProfile /> },
     ],
