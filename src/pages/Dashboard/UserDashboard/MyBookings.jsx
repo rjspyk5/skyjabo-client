@@ -23,7 +23,7 @@ export const MyBookings = () => {
     try {
       if (result.isConfirmed) {
         const result = await axiosSequre.put(`/booking/cancel/${bookingId}`, {
-          bookingStatus: "Cancelled",
+          bookingStatus: "cancelled",
         });
         curdOperationChecker(result);
       }

@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useAxiosPublic } from "../hooks/useAxiosPublic";
+
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -16,9 +17,11 @@ export const AuthProvider = ({ children }) => {
         const { userId, role } = logedUser;
         setuser({ userId, role });
       } catch (error) {
+        console.log(error);
         if (error.status === 403) {
           return setuser(null);
         }
+
         console.log("Can't check authState");
         setuser(null);
       } finally {

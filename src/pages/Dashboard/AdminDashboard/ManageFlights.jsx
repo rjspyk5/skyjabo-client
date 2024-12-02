@@ -11,7 +11,7 @@ import { ModallForEditFlight } from "../../../component/ModalForEditFlight/Modal
 export const ManageFlights = () => {
   const axiosSequre = useAxiosSequre();
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["loadAllFlights"],
+    queryKey: ["loadFlights"],
     queryFn: async () => {
       const result = await axiosSequre.get("/admin/flight");
       return result.data;
