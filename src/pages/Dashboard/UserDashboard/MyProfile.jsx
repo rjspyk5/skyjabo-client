@@ -1,15 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
 import { useAxiosSequre } from "../../../hooks/useAxiosSequre";
 import { useAuth } from "../../../hooks/useAuth";
 import img from "../../../assets/images/profile.jpg";
+import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 
 export const MyProfile = () => {
   const axiosSequre = useAxiosSequre();
   const { user } = useAuth();
-  const [userDetails, setUserDEtails] = useState({});
+  const [userDetails, setUserDetails] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -18,23 +20,37 @@ export const MyProfile = () => {
   } = useForm({
     defaultValues: userDetails,
   });
+
   const toggleEdit = () => {
     setIsEditing(!isEditing);
     reset(userDetails);
   };
-  const onSubmit = (formData) => {
-    setUser({ ...userDetails, ...formData });
-    setIsEditing(false);
+
+  const onSubmit = async (formData) => {
+    try {
+      const { username, phone } = formData;
+      const response = await axiosSequre.put(`/user/${user.userId}`, {
+        username,
+        phone,
+      });
+      curdOperationChecker(response);
+      setUserDetails({ ...userDetails, ...response.data });
+      setIsEditing(false);
+      refetch();
+    } catch (error) {
+      console.error("Error updating user details:", error);
+    }
   };
 
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
       const result = await axiosSequre.get(`/user/${user.userId}`);
-      setUserDEtails(result?.data);
+      setUserDetails(result?.data);
       return result.data;
     },
   });
+
   return (
     <div className="min-h-screen flex items-center justify-center pt-16">
       <div className="max-w-4xl w-full p-5">
@@ -44,8 +60,7 @@ export const MyProfile = () => {
             alt="Profile"
             className="w-32 h-32 rounded-full border-4 border-primary mb-6"
           />
-          <h1 className="text-3xl font-bold text-gray-900">{data?.name}</h1>
-
+          <h1 className="text-3xl font-bold text-gray-900">{data?.username}</h1>
           <button
             onClick={toggleEdit}
             className="mt-4 px-4 py-2 bg-primary text-white rounded-md hover:bg-pink-600"
@@ -66,16 +81,18 @@ export const MyProfile = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("name", { required: "Name is required" })}
+                  {...register("username", { required: "Name is required" })}
                   className="mt-1 p-2 w-full bg-gray-200 border text-black rounded-md focus:ring-blue-500 focus:border-blue-500"
                 />
-                {errors.name && (
-                  <p className="text-red-500 text-sm">{errors.name.message}</p>
+                {errors.username && (
+                  <p className="text-red-500 text-sm">
+                    {errors.username.message}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm  font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700">
                   Phone
                 </label>
                 <input
