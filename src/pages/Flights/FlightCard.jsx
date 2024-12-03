@@ -9,16 +9,27 @@ export const FlightCard = ({ flight }) => {
     <div className="p-5 flex flex-col gap-5 md:flex-row md:items-center bg-white rounded-md justify-between mb-5">
       {/* Airline Info */}
       <div className="md:flex md:flex-col hidden  justify-center items-center">
-        <img className="w-20" src={flight.img} alt={flight.airline} />
-        <p>{flight.airline}</p>
+        <p className="text-black font-bold">{flight.airline}</p>
       </div>
       {/* Timeline */}
       <div className="flex justify-between">
         <div className="md:hidden block">
-          <img className="w-20" src={flight.img} alt={flight.airline} />
-          <p>{flight.airline}</p>
+          <p className="text-black ">{flight.airline}</p>
         </div>
-        <ul className="timeline">
+        <div className="">
+          <div className="flex  justify-center items-center">
+            <p className="text-gray-600 mb-2 mr-2 text-xl font-semibold">
+              {flight?.origin}
+            </p>
+            <PiAirplaneTakeoffFill className="h-5 hidden md:block w-5 text-black font-bold mb-2" />
+            <p className="h-1  bg-black w-20  md:w-48 lg:w-56"></p>{" "}
+            <PiAirplaneLandingFill className="h-5 hidden md:block w-5 text-black font-bold mb-2" />
+            <p className="text-gray-600 mb-2 ml-2 text-xl font-semibold">
+              {flight?.destination}
+            </p>
+          </div>
+        </div>
+        {/* <ul className="timeline">
           <li>
             <div className="timeline-start">{flight.time}</div>
             <div className="timeline-middle">
@@ -41,7 +52,7 @@ export const FlightCard = ({ flight }) => {
             </div>
             <div className="timeline-end">{flight.destination}</div>
           </li>
-        </ul>
+        </ul> */}
       </div>
       {/* Price */}
       <div className="font-bold text-black text-2xl hidden md:block">
