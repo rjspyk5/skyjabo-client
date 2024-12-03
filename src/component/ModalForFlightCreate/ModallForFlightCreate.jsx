@@ -104,7 +104,6 @@ export const ModallForFlightCreate = ({ htmlfor, refetch }) => {
               )}
             </div>
 
-            {/* Departure Time */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-black">Departure Time</span>

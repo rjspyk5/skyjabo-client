@@ -1,5 +1,4 @@
 import React from "react";
-import "../Hero.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { BsCalendarDate } from "react-icons/bs";
 import DatePicker from "react-datepicker";
@@ -10,9 +9,17 @@ export const CustomDatePicker = ({
   change,
   errors,
 }) => {
+  const handleDateChange = (date) => {
+    const correctedDate = new Date(date);
+    correctedDate.setUTCHours(0, 0, 0, 0);
+
+    setStartDate(correctedDate);
+    change(correctedDate);
+  };
+
   return (
     <div>
-      <label className="inputt  flex items-center gap-2">
+      <label className="inputt flex items-center gap-2">
         <DatePicker
           closeOnScroll={true}
           toggleCalendarOnIconClick
@@ -20,11 +27,11 @@ export const CustomDatePicker = ({
           placeholderText="Select Date"
           selected={startDate}
           dateFormat="MMMM d, yyyy"
-          onChange={change}
+          onChange={handleDateChange}
           icon={
             <BsCalendarDate className=" bottom-[-20%] left-[-3%] cursor-pointer" />
           }
-          className="calender "
+          className="calender"
         />
       </label>
       <span className="text-red-500">

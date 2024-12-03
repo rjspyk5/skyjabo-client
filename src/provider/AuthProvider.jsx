@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
+
 import { useAxiosPublic } from "../hooks/useAxiosPublic";
-import { useNavigate } from "react-router";
 
 export const AuthContext = createContext(null);
 
@@ -14,23 +13,23 @@ export const AuthProvider = ({ children }) => {
     const authStateChanged = async () => {
       try {
         setloading(true);
-        const { data: loggedInUser } = await axiosPublic.get("/authstate");
-        const { userId, role } = loggedInUser;
-        setuser({ userId, role });
-      } catch (error) {
-        if (error.response?.status === 403) {
+        const { data } = await axiosPublic.get("/authstate");
+        if (data?.isLogin === 1) {
           setuser(null);
+          setloading(false);
         } else {
-          setuser(null);
+          const { userId, role } = data;
+          setuser({ userId, role });
+          setloading(false);
         }
+      } catch (error) {
+        setuser(null);
       } finally {
         setloading(false);
       }
     };
 
-    return () => {
-      authStateChanged();
-    };
+    authStateChanged();
   }, []);
 
   const login = () => {};

@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { useAxiosPublic } from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
   const axiosPublic = useAxiosPublic();
+  const { setuser } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -16,24 +18,33 @@ export const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const result = await axiosPublic.post("/login", data);
-    if (result.status === 200) {
+
+    if (result?.data?.data?.role === 1) {
+      setuser(result?.data?.data);
       navigate("/");
       Swal.fire({
         icon: "success",
         title: result?.data?.message,
         timer: 1500,
       });
-
-      window.location.reload();
-    } else {
+    } else if (result?.data?.data?.role === 0) {
+      setuser(result?.data?.data);
+      navigate("/admin");
+      Swal.fire({
+        icon: "success",
+        title: result?.data?.message,
+        timer: 1500,
+      });
+    } else if (
+      result?.data?.data?.role !== 0 &&
+      result?.data?.data?.role !== 1
+    ) {
       Swal.fire({
         icon: "error",
         title: result?.data?.message,
         timer: 1500,
       });
     }
-
-    console.log(result.data);
   };
   return (
     <div>
