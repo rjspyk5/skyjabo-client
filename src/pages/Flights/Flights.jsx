@@ -10,10 +10,10 @@ import { Filter } from "./Filter";
 import { FlightCard } from "./FlightCard";
 export const Flights = () => {
   const navigate = useNavigate();
-  const [priceRange, setPriceRange] = useState([20, 80]);
-  const [availableRange, setavailableRange] = useState([20, 80]);
-  const [durationRange, setDurationRange] = useState([20, 80]);
-
+  const [priceRange, setPriceRange] = useState([1, 10000]);
+  const [availableRange, setavailableRange] = useState([1, 100]);
+  const [durationRange, setDurationRange] = useState([1, 50]);
+  const [selectedAirlines, setSelectedAirlines] = useState([]);
   const { state } = useLocation();
   const axiosSequre = useAxiosSequre();
   const [clearSearch, setclearSearch] = useState(false);
@@ -36,26 +36,45 @@ export const Flights = () => {
   }, []);
 
   const { data, refetch, isLoading } = useQuery({
-    queryKey: ["flights", searchParams],
+    queryKey: [
+      "flights",
+      searchParams,
+      priceRange,
+      durationRange,
+      availableRange,
+      selectedAirlines,
+    ],
     queryFn: async () => {
       const { origin, destination, date } = searchParams;
 
-      if (origin && destination && date) {
-        const response = await axiosPublic.get("/flights/search", {
-          params: {
-            origin,
-            destination,
-            date,
-          },
-        });
-        return response.data;
-      } else {
-        const response = await axiosPublic.get("/flights");
-        return response.data;
-      }
+      const response = await axiosPublic.get("/flights/search", {
+        params: {
+          origin,
+          destination,
+          date,
+          minPrice: priceRange[0],
+          maxPrice: priceRange[1],
+          minDuration: durationRange[0],
+          maxDuration: durationRange[1],
+          minSeats: availableRange[0],
+          maxSeats: availableRange[1],
+          airlines: selectedAirlines.length ? selectedAirlines : undefined,
+        },
+      });
+
+      return response.data;
     },
   });
 
+  useEffect(() => {
+    refetch();
+  }, [
+    priceRange,
+    durationRange,
+    availableRange,
+    searchParams,
+    selectedAirlines,
+  ]);
   return (
     <div className="pt-10">
       <div className="mb-10">
@@ -69,7 +88,6 @@ export const Flights = () => {
         <div className="w-[25%] hidden lg:block space-y-5">
           <div className="flex justify-between p-3 border-b">
             <h6> Filters</h6>
-            <span>clear</span>
           </div>
           <Filter
             priceRange={priceRange}
@@ -78,6 +96,8 @@ export const Flights = () => {
             setDurationRange={setDurationRange}
             availableRange={availableRange}
             setavailableRange={setavailableRange}
+            selectedAirlines={selectedAirlines}
+            setSelectedAirlines={setSelectedAirlines}
           />
         </div>
         {/* Filter Section for large screen end */}
@@ -99,6 +119,8 @@ export const Flights = () => {
                     setDurationRange={setDurationRange}
                     availableRange={availableRange}
                     setavailableRange={setavailableRange}
+                    selectedAirlines={selectedAirlines}
+                    setSelectedAirlines={setSelectedAirlines}
                   />
                 </div>
               </ul>

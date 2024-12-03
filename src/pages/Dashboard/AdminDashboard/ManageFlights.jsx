@@ -44,7 +44,7 @@ export const ManageFlights = () => {
         <div className="flex justify-end mb-3">
           <label
             htmlFor="my_modal_6"
-            className=" cursor-pointer   bg-green-600 text-white px-3 py-2 rounded-lg"
+            className=" cursor-pointer bg-green-600 text-white px-3 py-2 rounded-lg"
           >
             Create Flight
           </label>

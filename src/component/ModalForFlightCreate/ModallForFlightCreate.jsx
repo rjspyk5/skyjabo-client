@@ -206,6 +206,24 @@ export const ModallForFlightCreate = ({ htmlfor, refetch }) => {
               )}
             </div>
 
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-black">Duration (hour)</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Enter duration hour"
+                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("duration", {
+                  required: "Price is required",
+                  min: 1,
+                })}
+              />
+              {errors.duration && (
+                <p className="text-red-500">{errors.duration.message}</p>
+              )}
+            </div>
+
             <div className="modal-action">
               <label
                 htmlFor={htmlfor}

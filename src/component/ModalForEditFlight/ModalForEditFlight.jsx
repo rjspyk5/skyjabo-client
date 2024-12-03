@@ -202,6 +202,25 @@ export const ModallForEditFlight = ({ htmlfor, refetch, data }) => {
               )}
             </div>
 
+            {/*Duration */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-black">Duration (h)</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Enter duration"
+                className="input input-bordered w-full bg-gray-100 text-black"
+                {...register("duration", {
+                  required: "Duration is required",
+                  min: 1,
+                })}
+              />
+              {errors.duration && (
+                <p className="text-red-500">{errors.duration.message}</p>
+              )}
+            </div>
+
             <div className="modal-action">
               <label
                 htmlFor={htmlfor}
