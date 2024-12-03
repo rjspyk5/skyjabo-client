@@ -64,15 +64,14 @@ Note: If you block third-party cookies in your browser, you might encounter issu
 3. **Create an .env file in the root directory and add necessary environment variables:**
 
    ```bash
+   VITE_APIKEY3=
+   VITE_AUTHDOMAIN3=
+   VITE_PROJECTID3=
+   VITE_STORAGEBUCKET3=
+   VITE_MESSAGINGSENDERID3=
+   VITE_APPID3=
 
    ```
-
-VITE_APIKEY3=
-VITE_AUTHDOMAIN3=
-VITE_PROJECTID3=
-VITE_STORAGEBUCKET3=
-VITE_MESSAGINGSENDERID3=
-VITE_APPID3=
 
 -For the .env file format and details, please contact [rjspyk5@gmail.com]
 
