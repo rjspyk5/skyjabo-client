@@ -8,6 +8,8 @@ A full-stack web application enabling users to search for flights, view availabl
 
 - [Sky Jabo Live](https://skyjabo.web.app)
 
+Note: If you block third-party cookies in your browser, you might encounter issues with the authentication system, as it relies on cookies for session management.
+
 ## Admin Credentials
 
 - **Username:** admin@gmail.com
