@@ -4,6 +4,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import { curdOperationChecker } from "../../../utlis/curdOperationChecker";
 import Swal from "sweetalert2";
 import { Loading } from "../../../component/Loading/Loading";
+import { Fade } from "react-awesome-reveal";
 
 export const MyBookings = () => {
   const { user } = useAuth();
@@ -66,87 +67,92 @@ export const MyBookings = () => {
   }
 
   return (
-    <div className="min-h-[400px] ">
-      <section className=" w-full pb-10 pt-20 text-center text-white">
-        <h1 className="text-4xl font-semibold mb-4">My Bookings</h1>
-        <p className="text-lg">Manage flight bookings</p>
-      </section>
+    <Fade>
+      <div className="min-h-[400px] ">
+        <section className=" w-full pb-10 pt-20 text-center text-white">
+          <h1 className="text-4xl font-semibold mb-4">My Bookings</h1>
+          <p className="text-lg">Manage flight bookings</p>
+        </section>
 
-      <div className="container mx-auto pb-8 px-4">
-        <div className="overflow-x-auto bg-white rounded-lg shadow-xl">
-          <table className="table-auto w-full text-left text-gray-800">
-            <thead className="bg-gray-600 text-white">
-              <tr>
-                <th className="py-2 px-2">Booking ID</th>
-                <th className="py-2 px-2">Customer Name</th>
-                <th className="py-2 px-2">Flight Name</th>
-                <th className="py-2 px-2">Route</th>
-                <th className="py-2 px-2">Date & Time</th>
-                <th className="py-2 px-2">Seats</th>
-                <th className="py-2 px-2">Total Price</th>
-                <th className="py-2 px-2">Status</th>
-                <th className="py-2 px-2">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookings.length === 0 ? (
+        <div className="container mx-auto pb-8 px-4">
+          <div className="overflow-x-auto bg-white rounded-lg shadow-xl">
+            <table className="table-auto w-full text-left text-gray-800">
+              <thead className="bg-gray-600 text-white">
                 <tr>
-                  <td colSpan="8" className="text-center py-4 text-gray-600">
-                    No bookings found.
-                  </td>
+                  <th className="py-2 px-2">Booking ID</th>
+                  <th className="py-2 px-2">Customer Name</th>
+                  <th className="py-2 px-2">Flight Name</th>
+                  <th className="py-2 px-2">Route</th>
+                  <th className="py-2 px-2">Date & Time</th>
+                  <th className="py-2 px-2">Seats</th>
+                  <th className="py-2 px-2">Total Price</th>
+                  <th className="py-2 px-2">Status</th>
+                  <th className="py-2 px-2">Action</th>
                 </tr>
-              ) : (
-                bookings.map((booking) => (
-                  <tr key={booking._id} className="border-b hover:bg-pink-100">
-                    <td className="py-2 px-2">{booking._id}</td>
-                    <td className="py-2 px-2">{booking.name}</td>
-                    <td className="py-2 px-2">
-                      {booking.flightDetails.airline}
-                    </td>
-                    <td className="py-2 px-2">
-                      {booking.flightDetails.origin} to{" "}
-                      {booking.flightDetails.destination}
-                    </td>
-                    <td className="py-2 px-2">
-                      {new Date(
-                        booking.flightDetails.date
-                      ).toLocaleDateString()}{" "}
-                      {booking.flightDetails.time}
-                    </td>
-                    <td className="py-2 px-2">{booking.numberOfSeats}</td>
-                    <td className="py-2 px-2">
-                      ${booking.totalPrice.toFixed(2)}
-                    </td>
-                    <td className="py-2 px-2">
-                      <span
-                        className={`px-2 py-2 rounded-full  ${
-                          booking.bookingStatus === "confirmed"
-                            ? "text-green-500"
-                            : booking.bookingStatus === "pending"
-                            ? "text-yellow-500"
-                            : "text-red-500"
-                        }`}
-                      >
-                        {booking.bookingStatus}
-                      </span>
-                    </td>
-                    <td className="py-2 px-2">
-                      {booking.bookingStatus === "pending" && (
-                        <button
-                          className="bg-red-600 text-white px-2 py-2 rounded-md hover:bg-red-700 transition"
-                          onClick={() => handleCancel(booking._id)}
-                        >
-                          Cancel
-                        </button>
-                      )}
+              </thead>
+              <tbody>
+                {bookings.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center py-4 text-gray-600">
+                      No bookings found.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  bookings.map((booking) => (
+                    <tr
+                      key={booking._id}
+                      className="border-b hover:bg-pink-100"
+                    >
+                      <td className="py-2 px-2">{booking._id}</td>
+                      <td className="py-2 px-2">{booking.name}</td>
+                      <td className="py-2 px-2">
+                        {booking.flightDetails.airline}
+                      </td>
+                      <td className="py-2 px-2">
+                        {booking.flightDetails.origin} to{" "}
+                        {booking.flightDetails.destination}
+                      </td>
+                      <td className="py-2 px-2">
+                        {new Date(
+                          booking.flightDetails.date
+                        ).toLocaleDateString()}{" "}
+                        {booking.flightDetails.time}
+                      </td>
+                      <td className="py-2 px-2">{booking.numberOfSeats}</td>
+                      <td className="py-2 px-2">
+                        ${booking.totalPrice.toFixed(2)}
+                      </td>
+                      <td className="py-2 px-2">
+                        <span
+                          className={`px-2 py-2 rounded-full  ${
+                            booking.bookingStatus === "confirmed"
+                              ? "text-green-500"
+                              : booking.bookingStatus === "pending"
+                              ? "text-yellow-500"
+                              : "text-red-500"
+                          }`}
+                        >
+                          {booking.bookingStatus}
+                        </span>
+                      </td>
+                      <td className="py-2 px-2">
+                        {booking.bookingStatus === "pending" && (
+                          <button
+                            className="bg-red-600 text-white px-2 py-2 rounded-md hover:bg-red-700 transition"
+                            onClick={() => handleCancel(booking._id)}
+                          >
+                            Cancel
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    </Fade>
   );
 };
