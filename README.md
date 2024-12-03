@@ -75,14 +75,12 @@ Note: If you block third-party cookies in your browser, you might encounter issu
 
 -For the .env file format and details, please contact [rjspyk5@gmail.com]
 
-````
-
 4. **Run the development server::**
 
 ```bash
 npm run dev
 
 
-````
+```
 
 5. **Download the server from the provided GitHub repository and follow its setup instructions**
