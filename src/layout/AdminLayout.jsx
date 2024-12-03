@@ -70,7 +70,7 @@ export const AdminLayout = () => {
     <>
       <div className="flex">
         {/* left side menu*/}
-        <div className="w-[23%] hidden lg:block bg-white fixed top-0 h-full bg-gradient-to-br ">
+        <div className="w-[23%] hidden lg:block bg-slate-200 fixed top-0 h-full bg-gradient-to-br ">
           <div className="py-4 px-8">
             <img className="w-20 h-8" src={logo} alt="" />
           </div>
@@ -82,7 +82,7 @@ export const AdminLayout = () => {
 
         <div className="flex-1  bg-[#F4F2F3] min-h-screen lg:ml-[23%] w-full">
           {/* Navbar */}
-          <div className="flex w-full justify-between items-center pt-2 pb-[7px]  bg-white  ">
+          <div className="flex sticky top-0 w-full justify-between items-center pt-2 pb-[7px]  bg-slate-200  ">
             <DrawerForAdmin menu={menu} />
             <img className="w-20 h-8 lg:hidden" src={logo} alt="" />
             <div className="dropdown dropdown-end ">
@@ -97,7 +97,7 @@ export const AdminLayout = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white *:text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-slate-200 *:text-black rounded-box z-[1] mt-3 w-52 p-2 shadow"
               >
                 <li>
                   <Link to="/admin/profile">Profile</Link>

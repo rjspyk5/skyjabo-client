@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { SearchSection } from "../../component/Hero/SearchSection/SearchSection";
-
 import { useQuery } from "@tanstack/react-query";
-import { useAxiosPublic } from "./../../hooks/useAxiosPublic";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useAxiosPublic } from "../../hooks/useAxiosPublic";
+import { useLocation, useNavigate } from "react-router";
 import { useAxiosSequre } from "../../hooks/useAxiosSequre";
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { Filter } from "./Filter";
 import { FlightCard } from "./FlightCard";
+import { Loading } from "../../component/Loading/Loading";
+
 export const Flights = () => {
   const navigate = useNavigate();
   const [priceRange, setPriceRange] = useState([1, 10000]);
@@ -33,7 +34,7 @@ export const Flights = () => {
       destination,
       date,
     });
-  }, []);
+  }, [state]);
 
   const { data, refetch, isLoading } = useQuery({
     queryKey: [
@@ -46,7 +47,6 @@ export const Flights = () => {
     ],
     queryFn: async () => {
       const { origin, destination, date } = searchParams;
-
       const response = await axiosPublic.get("/flights/search", {
         params: {
           origin,
@@ -61,7 +61,6 @@ export const Flights = () => {
           airlines: selectedAirlines.length ? selectedAirlines : undefined,
         },
       });
-
       return response.data;
     },
   });
@@ -74,9 +73,11 @@ export const Flights = () => {
     availableRange,
     searchParams,
     selectedAirlines,
+    refetch,
   ]);
+
   return (
-    <div className="pt-10">
+    <div className="pt-10 pb-10 max-w-[1200px] px-10 mx-auto">
       <div className="mb-10">
         <SearchSection
           setSearchParams={setSearchParams}
@@ -100,18 +101,16 @@ export const Flights = () => {
             setSelectedAirlines={setSelectedAirlines}
           />
         </div>
-        {/* Filter Section for large screen end */}
 
         <div className="flex-1">
           <div className="flex justify-between">
             {/* Mobile Device Filter Section */}
             <details className="dropdown lg:hidden">
               <summary className="btn m-1 lg:hidden flex justify-center items-center">
-                {" "}
                 <HiOutlineAdjustmentsHorizontal /> Filter
               </summary>
               <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-96 p-2 shadow">
-                <div className="space-y-3 ">
+                <div className="space-y-3">
                   <Filter
                     priceRange={priceRange}
                     setPriceRange={setPriceRange}
@@ -125,12 +124,9 @@ export const Flights = () => {
                 </div>
               </ul>
             </details>
-            {/* Mobile device Filter Section End */}
 
-            <h6 className="md:text-2xl  font-bold p-4">
-              {!isLoading && searchParams?.origin
-                ? `${data?.length} flights available based on your search`
-                : "Showing All Flights from our own database"}
+            <h6 className="md:text-2xl font-bold p-4">
+              {!isLoading && `Total ${data?.length} flights available`}
             </h6>
             {searchParams?.origin && (
               <p
@@ -145,10 +141,13 @@ export const Flights = () => {
             )}
           </div>
 
-          {!isLoading &&
+          {isLoading ? (
+            <Loading />
+          ) : (
             data?.map((flight) => (
               <FlightCard key={flight._id} flight={flight} />
-            ))}
+            ))
+          )}
         </div>
       </div>
     </div>

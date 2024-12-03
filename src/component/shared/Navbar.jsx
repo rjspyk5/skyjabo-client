@@ -15,8 +15,8 @@ export const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "bg-primary font-bold text-white"
-              : "font-bold text-white"
+              ? "bg-primary font-bold text-white focus:!bg-primary focus:!text-white"
+              : "font-bold text-white "
           }
         >
           Home
@@ -27,7 +27,7 @@ export const Navbar = () => {
           to="/flights"
           className={({ isActive }) =>
             isActive
-              ? "bg-primary font-bold text-white"
+              ? "bg-primary font-bold text-white focus:!bg-primary focus:!text-white"
               : "font-bold text-white"
           }
         >
@@ -40,7 +40,7 @@ export const Navbar = () => {
             to="/bookings"
             className={({ isActive }) =>
               isActive
-                ? "bg-primary font-bold text-white"
+                ? "bg-primary font-bold text-white focus:!bg-primary focus:!text-white"
                 : "font-bold text-white"
             }
           >
@@ -54,7 +54,7 @@ export const Navbar = () => {
             to="/profile"
             className={({ isActive }) =>
               isActive
-                ? "bg-primary font-bold text-white"
+                ? "bg-primary font-bold text-white focus:!bg-primary focus:!text-white"
                 : "font-bold text-white"
             }
           >
@@ -114,7 +114,7 @@ export const Navbar = () => {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 py-5 px-3 shadow"
                   >
                     <li>
                       <Link to="/profile" className="justify-between">

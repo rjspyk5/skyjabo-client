@@ -34,7 +34,7 @@ export const Filter = ({
   return (
     <>
       {/* Price Range */}
-      <div className="p-3 bg-white text-black rounded-lg space-y-3">
+      <div className="p-3 bg-slate-200 text-black rounded-lg space-y-3">
         <h6>Price</h6>
         <RangeSlider
           min={0}
@@ -49,7 +49,7 @@ export const Filter = ({
       </div>
 
       {/* Duration Range */}
-      <div className="p-3 bg-white text-black rounded-lg space-y-3">
+      <div className="p-3 bg-slate-200 text-black rounded-lg space-y-3">
         <h6>Duration</h6>
         <RangeSlider
           min={0}
@@ -64,7 +64,7 @@ export const Filter = ({
       </div>
 
       {/* Available Seats */}
-      <div className="p-3 bg-white text-black rounded-lg space-y-3">
+      <div className="p-3 bg-slate-200 text-black rounded-lg space-y-3">
         <h6>Available Seats</h6>
         <RangeSlider
           min={0}
@@ -79,11 +79,11 @@ export const Filter = ({
       </div>
 
       {/* Airlines */}
-      <details className="collapse collapse-open !rounded-lg bg-white collapse-arrow max-h-48 overflow-auto">
+      <details className="collapse collapse-open !rounded-lg bg-slate-200 collapse-arrow max-h-48 overflow-auto">
         <summary className="collapse-title text-black cursor-pointer">
           Airlines
         </summary>
-        <div className="collapse-content bg-white text-black rounded-lg space-y-3">
+        <div className="collapse-content bg-slate-200 text-black rounded-lg space-y-3">
           {isLoading ? (
             <p>Loading airlines...</p>
           ) : (

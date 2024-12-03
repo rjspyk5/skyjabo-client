@@ -53,14 +53,14 @@ export const MyProfile = () => {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center pt-16">
+    <div className="min-h-screen flex items-center justify-center pt-12">
       {isLoading ? (
         <Loading />
       ) : (
         <>
           {" "}
           <div className="max-w-4xl w-full p-5">
-            <div className="bg-white shadow-lg rounded-lg p-5 flex flex-col items-center">
+            <div className="bg-slate-200 shadow-lg rounded-lg p-5 flex flex-col items-center">
               <img
                 src={img}
                 alt="Profile"
@@ -78,7 +78,7 @@ export const MyProfile = () => {
             </div>
 
             {isEditing && (
-              <div className="mt-10 bg-white shadow-md rounded-lg p-8">
+              <div className="mt-10 bg-slate-200 shadow-md rounded-lg p-8">
                 <h2 className="text-2xl font-semibold text-gray-800">
                   Edit Profile
                 </h2>
@@ -150,14 +150,14 @@ export const MyProfile = () => {
 
             {!isEditing && (
               <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white shadow-md rounded-lg p-8">
+                <div className="bg-slate-200 shadow-md rounded-lg p-8">
                   <h2 className="text-2xl font-semibold text-gray-800">
                     Phone
                   </h2>
                   <p className="mt-4 text-gray-600">{data?.phone}</p>
                 </div>
 
-                <div className="bg-white shadow-md rounded-lg p-8">
+                <div className="bg-slate-200 shadow-md rounded-lg p-8">
                   <h2 className="text-2xl font-semibold text-gray-800">
                     Email
                   </h2>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useNavigate, useParams } from "react-router";
-import { useAxiosSequre } from "../../hooks/useAxiosSequre";
+
 import { useAxiosPublic } from "../../hooks/useAxiosPublic";
 import { Loading } from "../../component/Loading/Loading";
 
@@ -22,7 +22,7 @@ export const FlightDetails = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8 pt-20">
+    <div className="min-h-screen  p-8 pt-20">
       <button
         onClick={() => navigate(-1)}
         className=" p-3 bg-primary text-white rounded-lg shadow-md hover:bg-[#e93574f4] focus:outline-none"
@@ -35,7 +35,7 @@ export const FlightDetails = () => {
       ) : (
         <>
           {" "}
-          <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg space-y-6">
+          <div className="max-w-4xl mx-auto bg-slate-200 p-8 rounded-lg shadow-lg space-y-6">
             <h2 className="text-3xl font-bold text-gray-800 mb-6">
               Flight Details
             </h2>

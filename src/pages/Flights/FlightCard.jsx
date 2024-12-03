@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 export const FlightCard = ({ flight }) => {
   const navigate = useNavigate();
   return (
-    <div className="p-5 flex flex-col gap-5 md:flex-row md:items-center bg-white rounded-md justify-between mb-5">
+    <div className="p-5 flex flex-col gap-5 md:flex-row md:items-center bg-slate-200 rounded-md justify-between mb-5">
       {/* Airline Info */}
       <div className="md:flex md:flex-col hidden  justify-center items-center">
         <p className="text-black font-bold">{flight.airline}</p>
